@@ -27,8 +27,33 @@
   color: var(--cor-principal);
 }
 
+.box-dado select:disabled {
+  cursor: not-allowed;
+}
+
 /*  Transações  */
-.container-tabela {
-  border: 1px solid red;
-  height: 100vh;
+
+.tabela {
+  display: flex;
+  flex-direction: column;
+}
+
+.box-transacao {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 0;
+  font-size: 0.845rem;
+  font-weight: bold;
+  color: var(--cor2);
+}
+
+.estabelecimento {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.data {
+  color: var(--cor3);
 }
