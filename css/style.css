@@ -1,5 +1,6 @@
 @import url("aside.css");
 @import url("cartao.css");
+@import url("cadastro.css");
 
 * {
   margin: 0;
@@ -35,6 +36,8 @@ img {
   --cor3: #c3c7e6;
   --cor4: #828488;
 
+  --border-color: #e1e3e9;
+
   --green: #1ed799;
   --red: #e81538;
 
@@ -42,14 +45,6 @@ img {
 
   --box-shadow: rgb(0 0 0 / 10%) 0rem 0.25rem 0.375rem -0.0625rem,
     rgb(0 0 0 / 6%) 0rem 0.125rem 0.25rem -0.0625rem;
-}
-
-body {
-  font-family: "Poppins", "Roboto", sans-serif;
-  text-rendering: optimizeLegibility;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
-  background-color: var(--bg);
 }
 
 body.dark {
@@ -61,7 +56,17 @@ body.dark {
   --cor3: #3a454b;
   --cor4: #828488;
 
+  --border-color: #1e272e;
+
   --red: #d65989;
+}
+
+body {
+  font-family: "Poppins", "Roboto", sans-serif;
+  text-rendering: optimizeLegibility;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  background-color: var(--bg);
 }
 
 .estrutura {
@@ -99,7 +104,7 @@ body.dark {
   padding: 3.75rem 2.75rem;
   display: flex;
   flex-direction: column;
-  gap: var(--gap);
+  gap: 3.75rem;
 }
 
 .header-cartao {

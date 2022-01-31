@@ -37,6 +37,13 @@
   flex-direction: column;
 }
 
+.tabela h2 {
+  color: var(--cor2);
+  font-size: 1.125rem;
+  line-height: 1.2;
+  margin-bottom: 1.25rem;
+}
+
 .box-transacao {
   display: flex;
   align-items: center;
