@@ -1,0 +1,38 @@
+{
+  "name": "app-sequoia",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "webpack --watch --config webpack-config-dev.js",
+    "build": "webpack --config webpack-config-build.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/cli": "^7.12.10",
+    "@babel/core": "^7.12.10",
+    "@babel/preset-env": "^7.12.11",
+    "eslint": "^7.32.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.22.1",
+    "webpack": "^5.11.1",
+    "webpack-cli": "^4.3.0"
+  },
+  "dependencies": {
+    "@babel/polyfill": "^7.12.1",
+    "@material-ui/core": "^4.11.3",
+    "eslint-config-prettier": "^7.1.0",
+    "loaders.css": "^0.1.2",
+    "material-icons": "^0.6.0",
+    "whatwg-fetch": "^3.5.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Gabriel98N/app-sequoia-v8.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Gabriel98N/app-sequoia-v8/issues"
+  },
+  "homepage": "https://github.com/Gabriel98N/app-sequoia-v8#readme",
+  "description": ""
+}
