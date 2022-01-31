@@ -24,13 +24,13 @@ img {
 }
 
 :root {
-  --cor-principal: #6451f8;
+  --cor-principal: #1ed799;
   --gap: 1.25rem;
 
   --bg: #fff;
   --bg2: #f5f7fc;
 
-  --cor1: #979bad;
+  --cor1: #3a454b;
   --cor2: #404966;
   --cor3: #c3c7e6;
   --cor4: #828488;
@@ -49,6 +49,16 @@ body {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   background-color: var(--bg);
+}
+
+body.dark {
+  --bg: #101519;
+  --bg2: #131b1e;
+
+  --cor1: #979bad;
+  --cor2: #3a454b;
+  --cor3: #dae6ea;
+  --cor4: #828488;
 }
 
 .estrutura {
