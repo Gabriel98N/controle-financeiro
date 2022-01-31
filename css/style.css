@@ -35,7 +35,8 @@ img {
   --cor3: #c3c7e6;
   --cor4: #828488;
 
-  --green: #3dcc83;
+  --green: #1ed799;
+  --red: #e81538;
 
   --radius: 15px;
 
@@ -59,6 +60,8 @@ body.dark {
   --cor2: #dae5e9;
   --cor3: #3a454b;
   --cor4: #828488;
+
+  --red: #d65989;
 }
 
 .estrutura {
