@@ -32,6 +32,15 @@
   color: var(--cor3);
 }
 
+.nome-impresso {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.2);
+  posi
+}
+
 .vencimento {
   display: flex;
   align-items: center;
