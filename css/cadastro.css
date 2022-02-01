@@ -1,0 +1,134 @@
+.container-cadastro {
+  display: flex;
+  flex-direction: column;
+  gap: 3.75rem;
+}
+
+.box-cadastro {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(550px, 1fr));
+  align-items: center;
+  gap: var(--gap);
+}
+
+.cadastro {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap);
+}
+
+.cadastro h2 {
+  color: var(--cor2);
+}
+
+.fundo svg {
+  width: 100%;
+  height: 100%;
+}
+
+.box-input {
+  position: relative;
+  flex: 1;
+}
+
+.box-input input,
+.box-input select {
+  width: 100%;
+  height: 50px;
+  background: var(--bg2);
+  border: 0;
+  color: var(--cor2);
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  padding: 0 17px;
+  font-size: 0.845rem;
+  outline: none;
+  transition: border 0.3s;
+  border: 2px solid var(--bg2);
+  border-radius: 30px;
+}
+
+.box-input input:focus,
+.box-input select:focus {
+  border: 2px solid var(--cor-principal);
+}
+
+.box-input select option {
+  background-color: var(--bg1);
+}
+
+.column2 {
+  display: flex;
+  gap: var(--gap);
+}
+
+.label {
+  position: absolute;
+  top: 16px;
+  left: var(--gap);
+  color: var(--cor2);
+  font-size: 0.75rem;
+  pointer-events: none;
+  transition: transform 0.2s;
+}
+
+.box-input input:focus ~ .label,
+.box-input select:focus ~ .label,
+.box-input input:valid ~ .label,
+.box-input select:valid ~ .label {
+  transform: translateY(-10px);
+  font-size: 0.5rem;
+}
+
+.btn-confirmar {
+  width: 100%;
+  height: 50px;
+  border-radius: 30px;
+  background-color: var(--cor-principal);
+  font-size: 1rem;
+  font-family: "Poppins", "Roboto", sans-serif;
+  text-transform: uppercase;
+  font-weight: bold;
+  border: 0;
+  color: #fff;
+  cursor: pointer;
+}
+
+.btn-confirmar:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.arrow {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  width: 20px;
+  height: 20px;
+}
+
+.arrow svg {
+  fill: var(--cor2);
+}
+
+.cartao-cadastrado h3 {
+  color: var(--cor2);
+  margin-bottom: 1.25rem;
+}
+
+.lista-cartao-cadastrado .cartao {
+  width: auto;
+}
+
+.lista-cartao-cadastrado {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--gap);
+}
+
+@media (max-width: 740px) {
+  .box-cadastro {
+    grid-template-columns: 1fr;
+  }
+}

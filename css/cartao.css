@@ -90,6 +90,10 @@
   color: var(--cor1);
 }
 
+.limite-disponivel {
+  text-align: right;
+}
+
 .barra-progresso {
   margin-top: 7px;
   height: 7px;
@@ -101,7 +105,7 @@
 
 .liquido {
   background-color: var(--cor-principal);
-  width: 50%;
+  width: 0;
   height: 100%;
   position: absolute;
   top: 0;
@@ -158,6 +162,10 @@
   color: var(--cor2);
 }
 
+.box-selecionar-banco select:disabled {
+  cursor: not-allowed;
+}
+
 @media (max-width: 1200px) {
   .cartao {
     width: 100%;
@@ -179,4 +187,14 @@
 .tabela-transacao {
   height: 700px;
   overflow: auto;
+  background-color: var(--bg2);
+  border-radius: 15px;
+}
+
+.aviso-transacao {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--cor3);
 }

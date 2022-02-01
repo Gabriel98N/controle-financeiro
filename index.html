@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
   <meta charset="UTF-8">
@@ -34,11 +34,11 @@
               <div class="box-limite">
                 <div>
                   <h3>Limite utilizado</h3>
-                  <p>R$ 30,00</p>
+                  <p class="limite-utilizado">R$ 0,00</p>
                 </div>
                 <div>
                   <h3>Limite disponível</h3>
-                  <p>R$ 30.000,00</p>
+                  <p class="limite-disponivel">R$ 0,00</p>
                 </div>
               </div>
               <div class="barra-progresso">
@@ -49,22 +49,22 @@
           <div class="container-pagamento">
             <div class="box-pagamento">
               <h3>Total à Pagar</h3>
-              <p>R$ 5.000,00</p>
+              <p>R$ 0,00</p>
             </div>
             <div class="box-pagamento">
               <h3>Saldo</h3>
-              <p>R$ 3.000,00</p>
+              <p>R$ 0,00</p>
             </div>
             <div class="box-selecionar-banco">
               <h3>Alterar banco</h3>
-              <select name="banco" id="banco">
+              <select name="banco" id="banco" disabled>
                 <option value="" disabled selected>Selecione um banco</option>
               </select>
             </div>
           </div>
         </div>
         <div class="tabela-transacao">
-          Tabela
+          <span class="aviso-transacao">Sem transação</span>
         </div>
       </div>
     </div>
