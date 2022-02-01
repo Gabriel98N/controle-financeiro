@@ -1,14 +1,26 @@
 .container-cartao {
   display: flex;
   flex-direction: column;
-  gap: var(--gap);
+  gap: 3.75rem;
   height: 100%;
 }
 
 .header-cartao {
   display: grid;
   grid-template-columns: auto 1fr;
-  gap: var(--gap);
+  gap: 3.75rem;
+  position: sticky;
+  top: 20px;
+  left: 0;
+  z-index: 1;
+  background-color: var(--bg);
+}
+
+@media (max-width: 1200px) {
+  .header-cartao {
+    position: static;
+    grid-template-columns: 1fr;
+  }
 }
 
 .box-cartao {
@@ -95,4 +107,76 @@
   top: 0;
   left: 0;
   border-radius: inherit;
+}
+
+/*  Area pagamento  */
+.container-pagamento {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--gap);
+  align-self: flex-start;
+}
+
+.box-pagamento {
+  background-color: var(--bg2);
+  padding: var(--gap);
+  border-radius: 15px;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.box-pagamento h3 {
+  color: var(--cor3);
+}
+
+.box-pagamento p {
+  font-size: 2.25rem;
+  font-weight: bold;
+  color: var(--cor2);
+}
+
+.box-selecionar-banco {
+  width: 100%;
+}
+
+.box-selecionar-banco h3 {
+  color: var(--cor3);
+}
+
+.box-selecionar-banco select {
+  width: 100%;
+  padding: 1.25rem;
+  border: 0;
+  background: var(--bg2);
+  border-radius: 5px;
+  font-size: 1rem;
+  font-family: "Poppins", "Roboto", sans-serif;
+  margin-top: 7px;
+  color: var(--cor2);
+}
+
+@media (max-width: 1200px) {
+  .cartao {
+    width: 100%;
+  }
+
+  .box-selecionar-banco {
+    grid-column: 1 / -1;
+  }
+
+  .box-pagamento h3 {
+    font-size: 1rem;
+  }
+  .box-pagamento p {
+    font-size: 1.125rem;
+  }
+}
+
+/* Tabela */
+.tabela-transacao {
+  height: 700px;
+  overflow: auto;
 }
