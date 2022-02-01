@@ -1,6 +1,4 @@
-@import url("aside.css");
 @import url("cartao.css");
-@import url("cadastro.css");
 
 * {
   margin: 0;
@@ -26,6 +24,7 @@ img {
 
 :root {
   --cor-principal: #1ed799;
+
   --gap: 1.25rem;
 
   --bg: #fff;
@@ -54,7 +53,7 @@ body.dark {
   --cor1: #979bad;
   --cor2: #dae5e9;
   --cor3: #3a454b;
-  --cor4: #828488;
+  --cor4: #25323a;
 
   --border-color: #1e272e;
 
@@ -69,106 +68,167 @@ body {
   background-color: var(--bg);
 }
 
-.estrutura {
-  height: 100vh;
-  display: grid;
-  grid-template-columns: 100px 1fr;
-  gap: var(--gap);
-  padding: var(--gap);
-}
-
 .container {
   width: 100%;
   max-width: 1400px;
   margin: 0 auto;
 }
 
-.aside-nav {
-  width: 100px;
-  height: calc(100vh - 40px);
-  grid-column: 1;
-  grid-row: 1 / -1;
-  position: fixed;
-  top: 1.25rem;
-  left: 1.25rem;
-  background-color: var(--bg2);
-  border-radius: 15px 100px 15px 15px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.titulo1 {
+  font-size: 1rem;
+  line-height: 1.2;
+  font-weight: bold;
+}
+
+.titulo2 {
+  font-size: 1.5rem;
+  line-height: 1.2;
+}
+
+.titulo3 {
+  font-size: 2.25rem;
+  line-height: 50px;
+}
+
+.titulo4 {
+  font-size: 3rem;
+  line-height: 70px;
+}
+/*********************************************/
+
+.estrutura {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 140px 1fr;
+}
+
+.content,
+.aside-navegacao {
+  /* border: 1px solid red; */
 }
 
 .content {
-  grid-column: 2 / -1;
-  grid-row: 1;
-  padding: 3.75rem 2.75rem;
-  display: flex;
-  flex-direction: column;
-  gap: 3.75rem;
+  grid-column: 2;
+  padding: 3.75rem var(--gap);
 }
 
-.header-cartao {
-  position: sticky;
-  top: var(--gap);
+.aside-navegacao {
+  grid-column: 1;
+  grid-row: 1;
+  padding: var(--gap);
+  position: fixed;
+  top: 0;
   left: 0;
+  width: 140px;
+  height: 100vh;
   z-index: 1;
+}
+
+.nav-aside {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--bg2);
+  border-radius: 15px 100px 15px 15px;
+  gap: var(--gap);
+  padding: 3.75rem 0;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.logo i {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1.2;
+  color: var(--cor1);
   background-color: var(--bg);
 }
 
-.box-title h3 {
-  color: var(--cor3);
-  display: flex;
-  align-items: center;
-  gap: 7px;
-}
-
-.box-title h3::before {
-  content: "";
-  width: 7px;
-  height: 7px;
-  background-color: var(--green);
-  border-radius: 50%;
-}
-
-.box-title p {
-  font-size: 2rem;
+.logo span {
+  text-align: center;
+  font-size: 1.125rem;
   font-weight: bold;
-  line-height: 30px;
-  margin-top: 7px;
-  color: var(--cor2);
+  color: var(--cor3);
 }
 
-.container-dados {
-  display: flex;
-  align-items: center;
-  gap: 3.75rem;
-  margin-top: 3.75rem;
-}
-
-.cartao {
-  width: 300px;
-  height: 180px;
-  border-radius: 15px;
-  background-color: #2d2f36;
-  position: relative;
-  padding: 1.25rem;
+.lista-lateral {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  gap: var(--gap);
 }
 
-.cartao h4 {
-  color: var(--cor1);
-}
-
-.box-vencimento {
+.lista-lateral li a {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
+  color: var(--cor3);
 }
 
-.box-vencimento p {
-  font-weight: bold;
-  font-size: 1rem;
-  color: var(--cor4);
+.lista-lateral li a:hover {
+  color: var(--cor-principal);
+  background-color: var(--bg);
+}
+
+@media (max-width: 1200px) {
+  .estrutura {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 120px;
+  }
+
+  .content {
+    grid-column: 1;
+  }
+
+  .aside-navegacao {
+    grid-row: 2;
+    top: auto;
+    bottom: 0;
+    width: 100%;
+    height: 120px;
+  }
+
+  .nav-aside,
+  .lista-lateral {
+    flex-direction: row;
+  }
+
+  .nav-aside {
+    padding: 0 3.75rem;
+    border-radius: 15px 100px 15px 100px;
+    position: relative;
+  }
+
+  .logo i {
+    width: 35px;
+    height: 35px;
+  }
+
+  .logo span {
+    font-size: 0.845rem;
+  }
+
+  .lista-lateral li a {
+    width: 35px;
+    height: 35px;
+    z-index: 1;
+  }
+
+  .lista-lateral li a:hover {
+    color: var(--cor3);
+    background-color: var(--bg2);
+  }
 }

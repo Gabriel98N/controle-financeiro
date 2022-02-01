@@ -54,11 +54,11 @@ function Dom() {
   }
 
   function setStorage(key, arr) {
-    const arrStorage = JSON.parse(localStorage.getItem(key));
-    const getArr = arrStorage ? arrStorage : [];
-
     localStorage.setItem(key, JSON.stringify(arr));
-    return getArr;
+  }
+
+  function getStorage(key) {
+    return JSON.parse(localStorage.getItem(key));
   }
 
   return {
@@ -74,6 +74,7 @@ function Dom() {
     firstLetter,
     eventListeners,
     setStorage,
+    getStorage,
   };
 }
 
