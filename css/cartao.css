@@ -1,5 +1,4 @@
 .container-cartao {
-  /* border: 1px solid red; */
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -24,7 +23,7 @@
 .box-cartao {
   display: grid;
   grid-template-columns: auto 1fr;
-  gap: var(--gap);
+  gap: 3.75rem;
 }
 
 .cartao {
@@ -54,11 +53,12 @@
 .box-limite p {
   text-transform: uppercase;
   font-size: 0.75rem;
-  color: var(--cor3);
+  color: var(--cor2);
 }
 
 .box-limite span {
   font-weight: bold;
+  color: var(--cor1);
 }
 
 .barra-limite {
@@ -78,4 +78,52 @@
   left: 0;
   border-radius: inherit;
   background-color: var(--cor-principal);
+}
+
+.box-alterar-banco {
+  margin-top: 1.25rem;
+}
+
+.box-alterar-banco h3 {
+  color: var(--cor2);
+  margin-bottom: 0.625rem;
+}
+
+.box-alterar-banco select {
+  width: 100%;
+  padding: 0.625rem;
+  background-color: var(--bg2);
+  border: 0;
+  border-radius: 15px;
+  color: var(--cor2);
+  outline: none;
+}
+
+.box-alterar-banco select option,
+.box-alterar-banco select option:disabled {
+  background-color: var(--bg2);
+}
+
+/* Area pagamento  */
+
+.box-fatura {
+  display: flex;
+  align-self: flex-start;
+  gap: var(--gap);
+}
+
+.box-pagamento {
+  background-color: var(--bg2);
+  padding: var(--gap);
+  border-radius: 15px;
+}
+
+.box-pagamento h3 {
+  color: var(--cor3);
+}
+
+.box-pagamento p {
+  color: var(--cor2);
+  font-size: 2.25rem;
+  font-weight: bold;
 }
