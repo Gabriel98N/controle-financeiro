@@ -125,7 +125,7 @@
   background-color: var(--bg2);
   padding: var(--gap);
   border-radius: 15px;
-  height: 200px;
+  height: 180px;
   display: flex;
   align-items: center;
   flex-direction: column;
