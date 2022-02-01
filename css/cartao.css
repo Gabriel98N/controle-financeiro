@@ -21,7 +21,7 @@
   width: 300px;
   height: 180px;
   border-radius: 15px;
-  background-color: #30313a;
+  background-color: #9b02d6;
   padding: 1.25rem;
   display: flex;
   flex-direction: column;
@@ -36,7 +36,7 @@
   font-size: 1.5rem;
   font-weight: bold;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255, 0.3);
   flex: 1;
   display: flex;
   align-items: center;
