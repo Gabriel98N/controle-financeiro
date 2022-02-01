@@ -1,129 +1,87 @@
 .container-cartao {
-  height: 100%;
   display: flex;
   flex-direction: column;
-  gap: 3.75rem;
+  gap: var(--gap);
+  height: 100%;
 }
 
 .header-cartao {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: auto 1fr;
   gap: var(--gap);
 }
 
-.box-title span {
-  color: var(--cor3);
-}
-
-.box-title h3 {
-  color: var(--cor2);
-}
-
-/*  Area cartão  */
 .box-cartao {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 3.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap);
 }
 
 .cartao {
-  display: flex;
-  flex-direction: column;
-  gap: var(--gap);
-}
-
-.dados-cartao {
   width: 300px;
   height: 180px;
   border-radius: 15px;
   background-color: #30313a;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.cartao h3 {
+  color: var(--cor3);
+}
+
+.vencimento {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.vencimento span {
+  text-transform: uppercase;
+  color: var(--white);
+  font-weight: bold;
+  line-height: 14px;
+}
+.vencimento p {
+  color: var(--white);
+  font-size: 0.845rem;
 }
 
 .box-limite {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: var(--gap);
 }
 
-.box-limite {
-  font-size: 0.845rem;
+.box-limite h3 {
+  font-weight: normal;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  color: var(--cor3);
 }
 
 .box-limite p {
-  text-transform: uppercase;
-  font-size: 0.75rem;
-  color: var(--cor2);
-}
-
-.box-limite span {
   font-weight: bold;
   color: var(--cor1);
 }
 
-.barra-limite {
-  width: 100%;
-  height: 7px;
+.barra-progresso {
   margin-top: 7px;
-  border-radius: 5px;
+  height: 7px;
+  width: 100%;
   background-color: var(--bg2);
+  border-radius: 15px;
   position: relative;
 }
 
-.barra-limite .liquido {
+.liquido {
+  background-color: var(--cor-principal);
   width: 50%;
   height: 100%;
   position: absolute;
   top: 0;
   left: 0;
   border-radius: inherit;
-  background-color: var(--cor-principal);
-}
-
-.box-alterar-banco {
-  margin-top: 1.25rem;
-}
-
-.box-alterar-banco h3 {
-  color: var(--cor2);
-  margin-bottom: 0.625rem;
-}
-
-.box-alterar-banco select {
-  width: 100%;
-  padding: 0.625rem;
-  background-color: var(--bg2);
-  border: 0;
-  border-radius: 15px;
-  color: var(--cor2);
-  outline: none;
-}
-
-.box-alterar-banco select option,
-.box-alterar-banco select option:disabled {
-  background-color: var(--bg2);
-}
-
-/* Area pagamento  */
-
-.box-fatura {
-  display: flex;
-  align-self: flex-start;
-  gap: var(--gap);
-}
-
-.box-pagamento {
-  background-color: var(--bg2);
-  padding: var(--gap);
-  border-radius: 15px;
-}
-
-.box-pagamento h3 {
-  color: var(--cor3);
-}
-
-.box-pagamento p {
-  color: var(--cor2);
-  font-size: 2.25rem;
-  font-weight: bold;
 }
