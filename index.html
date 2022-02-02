@@ -56,20 +56,22 @@
               <p>R$ 0,00</p>
             </div>
             <div class="box-pagamento box-transacao">
-              <button class="adicionar-transacao" disabled>
+              <button class="btn-adicionar" disabled>
                 <i class="material-icons">add</i>
               </button>
               <form class="form-transacao" data-card>
-                <a href="#" class="fechar">
-                  <i class="material-icons">close</i>
-                </a>
                 <h3 class="titulo1">Adicionar conta e dinheiro</h3>
                 <input type="text" name="nome-transacao" id="nome-transacao" placeholder="Nome da Transação" required autocomplete="off">
+                <select name="tipo-transacao" id="tipo-transacao" required>
+                  <option value="" selected></option>
+                  <option value="saldo">Saldo</option>
+                  <option value="despesa">Despesa</option>
+                </select>
                 <div class="box-input-transacao">
-                  <input type="number" name="valor" id="valor" placeholder="Valor" required autocomplete="off">
+                  <input type="text" name="valor" id="valor" placeholder="Valor" required autocomplete="off">
                   <span class="mensagem">Adicionar despesa (-), adicionar dinheiro (+)</span>
                 </div>
-                <button class="btn-adicionar" disabled>Adicionar</button>
+                <button class="adicionar-transacao" disabled>Adicionar</button>
               </form>
             </div>
             <div class="box-selecionar-banco">

@@ -9,8 +9,16 @@ export default function Cartao() {
   const arrCartao = dom.getStorage("cartao");
 
   const formTransacao = dom.el(".form-transacao");
-  const btnAdicionar = dom.el(".adicionar-transacao");
+  const btnAdicionar = dom.el(".btn-adicionar");
+  const btnTransacao = dom.el(".adicionar-transacao");
   const active = "active";
+
+  const arrTransacaoStorage = dom.getStorage("transacao");
+  const arrTransacao = arrTransacaoStorage ? arrTransacaoStorage : [];
+
+  const nomeTransacao = dom.el("#nome-transacao");
+  const valorTransacao = dom.el("#valor");
+  const tipoTransacao = dom.el("#tipo-transacao");
 
   function mostrarBancoSelecionado(
     nomeImp,
@@ -134,9 +142,28 @@ export default function Cartao() {
     );
   }
 
+  function handleClickTransacao(e) {
+    e.preventDefault();
+    const verificarTipoTransacao =
+      tipoTransacao.value === "despesa" ? "-" : "+";
+
+    arrTransacao.push({
+      nomeTransacao: nomeTransacao.value,
+      valor: valorTransacao.value,
+      tipo_transacao: [tipoTransacao.value, verificarTipoTransacao],
+    });
+
+    nomeTransacao.value = "";
+    nomeTransacao.focus();
+    valor.value = "";
+
+    dom.setStorage("transacao", arrTransacao);
+  }
+
   function adicionarTransacao() {
     if (btnAdicionar) {
       btnAdicionar.addEventListener("click", handleClickAbrirForm);
+      btnTransacao.addEventListener("click", handleClickTransacao);
     }
   }
 

@@ -252,21 +252,12 @@
   box-shadow: var(--box-shadow);
 }
 
-.fechar {
-  display: none;
-}
-
-.fechar i {
-  color: var(--cor-principal);
-  font-weight: bold;
-  font-size: 1rem;
-}
-
 .form-transacao h3 {
   color: var(--cor2);
 }
 
 .form-transacao input,
+.form-transacao select,
 .form-transacao button {
   height: 50px;
   border: 0;
@@ -274,6 +265,9 @@
   font-size: 0.845rem;
   outline: none;
   border-radius: 30px;
+  color: var(--cor2);
+  background-color: var(--bg2);
+  padding: 0 1.25rem;
 }
 
 .box-input-transacao {
@@ -290,8 +284,6 @@
 .form-transacao input {
   width: 100%;
   background: var(--bg2);
-  padding: 0 1.25rem;
-  color: var(--cor2);
 }
 
 .form-transacao input::placeholder {
