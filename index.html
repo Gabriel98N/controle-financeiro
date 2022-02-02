@@ -14,7 +14,18 @@
   <title>Controle financeiro</title>
 </head>
 
-<body class="">
+<body class="dark">
+
+  <div class="container-loader" data-loader="geral">
+    <div class="loader">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+    <p>Alterando cartão...</p>
+  </div>
+
   <div class="estrutura">
     <div class="content">
       <div class="container-cartao container">
@@ -67,10 +78,7 @@
                   <option value="saldo">Saldo</option>
                   <option value="despesa">Despesa</option>
                 </select>
-                <div class="box-input-transacao">
-                  <input type="text" name="valor" id="valor" placeholder="Valor" required autocomplete="off">
-                  <span class="mensagem">Adicionar despesa (-), adicionar dinheiro (+)</span>
-                </div>
+                <input type="text" name="valor" id="valor" placeholder="Valor" required autocomplete="off">
                 <button class="adicionar-transacao" disabled>Adicionar</button>
               </form>
             </div>

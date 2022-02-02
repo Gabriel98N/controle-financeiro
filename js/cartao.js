@@ -1,5 +1,6 @@
 import Dom from "./dom.js";
 import outsideEvent from "./outside-event.js";
+import Data from "./data.js";
 
 const dom = Dom();
 
@@ -19,6 +20,7 @@ export default function Cartao() {
   const nomeTransacao = dom.el("#nome-transacao");
   const valorTransacao = dom.el("#valor");
   const tipoTransacao = dom.el("#tipo-transacao");
+  const tabelaTransacao = dom.el(".tabela-transacao");
 
   function mostrarBancoSelecionado(
     nomeImp,
@@ -130,6 +132,52 @@ export default function Cartao() {
     }
   }
 
+  function criarTransacao(nomeTransacao, tipo_transacao, valor, data) {
+    const transacao = dom.create("div");
+    transacao.classList.add("transacao");
+
+    if (tabelaTransacao) {
+      valor = valor.replace(",", ".");
+      const moedaBr = dom.conversorMoeda(valor, "PT-BR", "BRL");
+      transacao.innerHTML = `
+        <span data-identificador="${tipo_transacao}"></span>
+        <p class="nome-transacao">${dom.firstLetter(nomeTransacao)}</p>
+        <p class="data-transacao">${data}</p>
+        <p class="valor-transacao">${tipo_transacao}${moedaBr}</p>
+      `;
+      tabelaTransacao.appendChild(transacao);
+    }
+  }
+
+  function salvarTransacao() {
+    arrTransacao.forEach(
+      ({ nomeTransacao, tipo_transacao, valor, data, id }, index) => {
+        criarTransacao(nomeTransacao, tipo_transacao, valor, data);
+
+        if (id && cartao) {
+          const transacao = dom.els(".transacao")[index];
+          transacao.setAttribute("data-transacao", id);
+
+          const idTransacao = transacao.dataset.transacao;
+          const idCartao = cartao.dataset.id;
+
+          if (idTransacao === idCartao) {
+            transacao.style.display = "flex";
+          } else {
+            transacao.style.display = "none";
+          }
+        }
+
+        selectBanco.addEventListener("change", () => {
+          dom.el("[data-loader]").classList.add(active);
+          setTimeout(() => {
+            location.reload();
+          }, 2000);
+        });
+      }
+    );
+  }
+
   function handleClickAbrirForm(e) {
     e.preventDefault();
     formTransacao.classList.add(active);
@@ -144,20 +192,29 @@ export default function Cartao() {
 
   function handleClickTransacao(e) {
     e.preventDefault();
-    const verificarTipoTransacao =
-      tipoTransacao.value === "despesa" ? "-" : "+";
+    if (cartao) {
+      const verificarTipoTransacao =
+        tipoTransacao.value === "despesa" ? "-" : "+";
+      const data = Data();
+      const idCartao = cartao.dataset.id;
 
-    arrTransacao.push({
-      nomeTransacao: nomeTransacao.value,
-      valor: valorTransacao.value,
-      tipo_transacao: [tipoTransacao.value, verificarTipoTransacao],
-    });
+      arrTransacao.push({
+        nomeTransacao: nomeTransacao.value,
+        valor: valorTransacao.value,
+        tipo_transacao: verificarTipoTransacao,
+        data: data,
+        id: verificarTipoTransacao === "-" ? idCartao : null,
+      });
 
-    nomeTransacao.value = "";
-    nomeTransacao.focus();
-    valor.value = "";
-
-    dom.setStorage("transacao", arrTransacao);
+      criarTransacao(
+        nomeTransacao.value,
+        verificarTipoTransacao,
+        valorTransacao.value,
+        data
+      );
+      nomeTransacao.focus();
+      dom.setStorage("transacao", arrTransacao);
+    }
   }
 
   function adicionarTransacao() {
@@ -171,6 +228,7 @@ export default function Cartao() {
     selecionarBanco();
     cartaoAtivo();
     adicionarTransacao();
+    salvarTransacao();
   }
 
   return { init };

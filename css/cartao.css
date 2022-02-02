@@ -199,6 +199,50 @@
   overflow: auto;
   background-color: var(--bg2);
   border-radius: 15px;
+  box-shadow: var(--box-shadow);
+  padding: var(--gap);
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap);
+}
+
+.transacao {
+  color: var(--cor4);
+  font-size: 0.845rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.25rem;
+  position: relative;
+}
+
+.transacao p {
+  flex: 1;
+}
+
+[data-identificador] {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 5px;
+  height: 100%;
+}
+
+[data-identificador="+"] {
+  background-color: var(--green);
+}
+
+[data-identificador="-"] {
+  background-color: var(--red);
+}
+
+.valor-transacao {
+  font-weight: bold;
+  text-align: right;
+}
+
+.data-transacao {
+  text-align: center;
 }
 
 .aviso-transacao {
@@ -207,6 +251,7 @@
   align-items: center;
   justify-content: center;
   color: var(--cor3);
+  display: none;
 }
 
 .box-transacao {

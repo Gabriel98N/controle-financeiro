@@ -1,5 +1,6 @@
 @import url("cartao.css");
 @import url("cadastro.css");
+@import url("loader.css");
 
 * {
   margin: 0;
@@ -58,7 +59,7 @@ body.dark {
   --cor1: #979bad;
   --cor2: #dae5e9;
   --cor3: #3a454b;
-  --cor4: #25323a;
+  --cor4: #576369;
 
   --border-color: #1e272e;
 
