@@ -197,13 +197,12 @@
 .tabela-transacao {
   height: 700px;
   overflow: auto;
-  background-color: var(--bg2);
   border-radius: 15px;
   box-shadow: var(--box-shadow);
-  padding: var(--gap);
   display: flex;
   flex-direction: column;
   gap: var(--gap);
+  padding: 1.25rem 0;
 }
 
 .transacao {
@@ -226,6 +225,7 @@
   left: 0;
   width: 5px;
   height: 100%;
+  border-radius: 15px 0 0 15px;
 }
 
 [data-identificador="+"] {
