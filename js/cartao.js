@@ -122,18 +122,22 @@ export default function Cartao() {
     }
   }
 
+  function handleClickAbrirForm(e) {
+    e.preventDefault();
+    formTransacao.classList.add(active);
+    outsideEvent(
+      formTransacao,
+      () => {
+        formTransacao.classList.remove(active);
+      },
+      ["click"]
+    );
+  }
+
   function adicionarTransacao() {
-    btnAdicionar.addEventListener("click", (e) => {
-      e.preventDefault();
-      formTransacao.classList.add(active);
-      outsideEvent(
-        formTransacao,
-        () => {
-          formTransacao.classList.remove(active);
-        },
-        ["click"]
-      );
-    });
+    if (btnAdicionar) {
+      btnAdicionar.addEventListener("click", handleClickAbrirForm);
+    }
   }
 
   function init() {

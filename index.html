@@ -14,7 +14,7 @@
   <title>Controle financeiro</title>
 </head>
 
-<body class="dark">
+<body class="">
   <div class="estrutura">
     <div class="content">
       <div class="container-cartao container">
@@ -60,9 +60,15 @@
                 <i class="material-icons">add</i>
               </button>
               <form class="form-transacao" data-card>
+                <a href="#" class="fechar">
+                  <i class="material-icons">close</i>
+                </a>
                 <h3 class="titulo1">Adicionar conta e dinheiro</h3>
                 <input type="text" name="nome-transacao" id="nome-transacao" placeholder="Nome da Transação" required autocomplete="off">
-                <input type="number" name="valor" id="valor" placeholder="Valor" required autocomplete="off">
+                <div class="box-input-transacao">
+                  <input type="number" name="valor" id="valor" placeholder="Valor" required autocomplete="off">
+                  <span class="mensagem">Adicionar despesa (-), adicionar dinheiro (+)</span>
+                </div>
                 <button class="btn-adicionar" disabled>Adicionar</button>
               </form>
             </div>

@@ -243,13 +243,23 @@
   right: 0;
   width: 400px;
   background-color: var(--bg3);
-  z-index: 1;
+  z-index: 99;
   padding: var(--gap);
   display: flex;
   flex-direction: column;
   gap: var(--gap);
   border-radius: 5px;
   box-shadow: var(--box-shadow);
+}
+
+.fechar {
+  display: none;
+}
+
+.fechar i {
+  color: var(--cor-principal);
+  font-weight: bold;
+  font-size: 1rem;
 }
 
 .form-transacao h3 {
@@ -261,12 +271,24 @@
   height: 50px;
   border: 0;
   font-family: "Poppins", "Roboto", sans-serif;
-  font-size: 1rem;
+  font-size: 0.845rem;
   outline: none;
   border-radius: 30px;
 }
 
+.box-input-transacao {
+  width: 100%;
+}
+
+.mensagem {
+  color: var(--cor1);
+  font-size: 0.75rem;
+  margin-top: 10px;
+  text-align: center;
+}
+
 .form-transacao input {
+  width: 100%;
   background: var(--bg2);
   padding: 0 1.25rem;
   color: var(--cor2);
@@ -280,6 +302,7 @@
   background-color: var(--cor-principal);
   color: #fff;
   cursor: pointer;
+  font-size: 1rem;
 }
 
 [data-card] {
@@ -293,4 +316,18 @@
   visibility: visible;
   opacity: 1;
   transform: translate3d(0, 0, 0);
+}
+
+@media (max-width: 740px) {
+  .form-transacao {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+  }
+
+  .fechar {
+    display: block;
+  }
 }
