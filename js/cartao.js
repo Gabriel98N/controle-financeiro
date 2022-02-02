@@ -22,6 +22,11 @@ export default function Cartao() {
   const tipoTransacao = dom.el("#tipo-transacao");
   const tabelaTransacao = dom.el(".tabela-transacao");
 
+  const arrValores = {
+    despesa: [],
+    saldo: [],
+  };
+
   function mostrarBancoSelecionado(
     nomeImp,
     diaVenc,
@@ -149,6 +154,25 @@ export default function Cartao() {
     }
   }
 
+  function somarValores(valor, el, type) {
+    valor = valor.replace(",", ".");
+    type === "despesa"
+      ? arrValores.despesa.push(valor)
+      : arrValores.saldo.push(valor);
+
+    const element = dom.el(el);
+    const total = arrValores[type].reduce((ac, num) => ac + Number(num), 0);
+    element.innerText = dom.conversorMoeda(total, "PT-BR", "BRL");
+    return total;
+  }
+
+  function limiteCartao(idCartao, totalDespesa) {
+    const { limite } = arrCartao[idCartao];
+    const subLimite = Number(limite) - totalDespesa;
+    const limiteDisponivel = dom.el(".limite-disponivel");
+    limiteDisponivel.innerText = dom.conversorMoeda(subLimite, "PT-BR", "BRL");
+  }
+
   function salvarTransacao() {
     arrTransacao.forEach(
       ({ nomeTransacao, tipo_transacao, valor, data, id }, index) => {
@@ -163,9 +187,17 @@ export default function Cartao() {
 
           if (idTransacao === idCartao) {
             transacao.style.display = "flex";
+            const totalDespesa = somarValores(
+              valor,
+              "[data-dados='despesa'] p",
+              "despesa"
+            );
+            limiteCartao(idCartao, totalDespesa);
           } else {
             transacao.style.display = "none";
           }
+        } else {
+          somarValores(valor, "[data-dados='saldo'] p", "saldo");
         }
 
         selectBanco.addEventListener("change", () => {

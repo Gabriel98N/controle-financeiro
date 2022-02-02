@@ -37,13 +37,15 @@ export default function Cadastro() {
     cartao.classList.add("cartao");
     cartao.style.backgroundColor = corCartao;
 
+    const venc = diaVenc < 10 ? `0${diaVenc}` : diaVenc;
+
     if (listaCartao) {
       cartao.innerHTML = `
       <p class="nome-impresso">${nomeImp}</p>
         <div class="vencimento">
           <div>
             <span>Venc</span>
-            <p>${diaVenc}</p>
+            <p>${venc}</p>
           </div>
           <img src="${imgBandeira}" alt="${bandeira}">
         </div>
