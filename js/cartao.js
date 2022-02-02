@@ -3,6 +3,7 @@ import Dom from "./dom.js";
 const dom = Dom();
 
 export default function Cartao() {
+  const cartao = dom.el(".header-cartao .cartao");
   const selectBanco = dom.el("#banco");
   const arrCartao = dom.getStorage("cartao");
 
@@ -12,12 +13,13 @@ export default function Cartao() {
     logoBandeira,
     bandeira,
     corCartao,
+    limite,
     id
   ) {
-    const cartao = dom.el(".header-cartao .cartao");
     const nome_imp = cartao.querySelector(".nome-impresso");
     const vencimento = cartao.querySelector(".vencimento p");
     const imgLogo = cartao.querySelector(".vencimento img");
+    const limiteDisponivel = dom.el(".limite-disponivel");
 
     cartao.style.backgroundColor = corCartao;
     cartao.setAttribute("data-id", id);
@@ -27,6 +29,8 @@ export default function Cartao() {
 
     imgLogo.src = logoBandeira;
     imgLogo.alt = bandeira;
+
+    limiteDisponivel.innerText = dom.conversorMoeda(limite, "PT-BR", "BRL");
   }
 
   function selecionarBanco() {
@@ -41,15 +45,18 @@ export default function Cartao() {
 
       selectBanco.addEventListener("change", (e) => {
         arrCartao.forEach(
-          ({
-            instituicao,
-            nomeImp,
-            corCartao,
-            bandeira,
-            diaVenc,
-            logoBandeira,
-            id,
-          }) => {
+          (
+            {
+              instituicao,
+              nomeImp,
+              corCartao,
+              bandeira,
+              diaVenc,
+              logoBandeira,
+              limite,
+            },
+            index
+          ) => {
             if (instituicao === e.target.value) {
               mostrarBancoSelecionado(
                 nomeImp,
@@ -57,9 +64,10 @@ export default function Cartao() {
                 logoBandeira,
                 bandeira,
                 corCartao,
-                id
+                limite,
+                index
               );
-              dom.setStorage("idCartao", id);
+              dom.setStorage("idCartao", index);
             }
           }
         );
@@ -69,37 +77,38 @@ export default function Cartao() {
 
   function cartaoAtivo() {
     const idCartao = dom.getStorage("idCartao");
-    const optionBanco = selectBanco.querySelectorAll("option");
+    const optionBanco = dom.els("#banco option");
 
-    if (idCartao == 0 || idCartao > 0) {
-      arrCartao.forEach(
-        ({
+    arrCartao.forEach(
+      (
+        {
           instituicao,
           nomeImp,
           corCartao,
           bandeira,
           diaVenc,
           logoBandeira,
-          id,
-        }) => {
-          if (idCartao == id) {
-            mostrarBancoSelecionado(
-              nomeImp,
-              diaVenc,
-              logoBandeira,
-              bandeira,
-              corCartao,
-              id
-            );
-
-            optionBanco.forEach((option) => {
-              if (instituicao === option.value)
-                option.setAttribute("selected", "");
-            });
-          }
+          limite,
+        },
+        index
+      ) => {
+        if (idCartao == index) {
+          mostrarBancoSelecionado(
+            nomeImp,
+            diaVenc,
+            logoBandeira,
+            bandeira,
+            corCartao,
+            limite,
+            index
+          );
+          optionBanco.forEach((option) => {
+            if (instituicao === option.value)
+              option.setAttribute("selected", "");
+          });
         }
-      );
-    }
+      }
+    );
   }
 
   function init() {

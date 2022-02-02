@@ -109,7 +109,7 @@
 
 .liquido {
   background-color: var(--cor-principal);
-  width: 50%;
+  width: 0;
   height: 100%;
   position: absolute;
   top: 0;

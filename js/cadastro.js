@@ -13,7 +13,6 @@ export default function Cadastro() {
   const arrCartao = arrStorageCartao ? arrStorageCartao : [];
 
   const listaCartao = dom.el(".lista-cartao-cadastrado");
-  let count = 0;
 
   async function dadosJSON() {
     const response = await fetch("js/dados.json");
@@ -68,7 +67,6 @@ export default function Cadastro() {
               bandeira: bandeira,
               logoBandeira: logo_bandeira,
               corCartao: cor_cartao,
-              id: count++,
             });
             dom.setStorage("cartao", arrCartao);
             fnCartao(
