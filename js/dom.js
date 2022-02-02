@@ -55,6 +55,7 @@ function Dom() {
 
   function setStorage(key, arr) {
     localStorage.setItem(key, JSON.stringify(arr));
+    return arr;
   }
 
   function getStorage(key) {

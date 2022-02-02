@@ -3,42 +3,36 @@
     "nome_inst": "Nubank",
     "bandeira": "Master Card",
     "logo_bandeira": "img/icons/master-card.png",
-    "cor_cartao": "#9b02d6",
-    "cor_texto": "rgba(255, 255, 255, 0.7)"
+    "cor_cartao": "#9b02d6"
   },
   {
     "nome_inst": "Inter",
     "bandeira": "Master Card",
     "logo_bandeira": "img/icons/master-card.png",
-    "cor_cartao": "#ff7a00",
-    "cor_texto": "rgba(255, 255, 255, 0.7)"
+    "cor_cartao": "#ff7a00"
   },
   {
     "nome_inst": "C6 Bank",
     "bandeira": "Master Card",
     "logo_bandeira": "img/icons/master-card.png",
-    "cor_cartao": "#232323",
-    "cor_texto": "rgba(255, 255, 255, 0.7)"
+    "cor_cartao": "#232323"
   },
   {
     "nome_inst": "Next",
     "bandeira": "Visa",
     "logo_bandeira": "img/icons/visa.png",
-    "cor_cartao": "#00FF5F",
-    "cor_texto": "rgba(0, 0, 0, 0.8)"
+    "cor_cartao": "#00FF5F"
   },
   {
     "nome_inst": "Santander Fx",
     "bandeira": "Visa",
     "logo_bandeira": "img/icons/visa.png",
-    "cor_cartao": "#dc0000",
-    "cor_texto": "rgba(255, 255, 255, 0.7)"
+    "cor_cartao": "#dc0000"
   },
   {
     "nome_inst": "Will bank",
     "bandeira": "Master Card",
     "logo_bandeira": "img/icons/master-card.png",
-    "cor_cartao": "#FFD900",
-    "cor_texto": "rgba(255, 255, 255, 0.7)"
+    "cor_cartao": "#FFD900"
   }
 ]
