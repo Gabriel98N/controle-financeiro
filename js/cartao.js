@@ -172,6 +172,7 @@ export default function Cartao() {
   function limiteCartao(totalDespesa) {
     const limiteDisponivel = dom.el(".limite-disponivel");
     const limiteUtilizado = dom.el(".limite-utilizado");
+    const liquido = dom.el(".liquido");
 
     const somarLimite = (limite) => {
       return dom.conversorMoeda(limite, "PT-BR", "BRL");
@@ -201,6 +202,8 @@ export default function Cartao() {
     return totalValores;
   }
 
+  function mostrarTransacao() {}
+
   function adicionarTransacao() {
     if (btnTransacao && cartao) {
       btnTransacao.addEventListener("click", (e) => {
@@ -211,6 +214,10 @@ export default function Cartao() {
         const valorTransacao = dom.el("#valor").value;
         const tipoTransacao = dom.el("#tipo-transacao").value;
         const sinalTransacao = tipoTransacao === "despesa" ? "-" : "+";
+
+        if (tipoTransacao === "despesa") {
+          console.log(valorTransacao);
+        }
 
         criarTransacao(
           transacao,
@@ -227,6 +234,7 @@ export default function Cartao() {
           valor: valorTransacao,
           id: sinalTransacao === "-" ? idCartao : null,
         });
+
         dom.setStorage("transacao", arrTransacao);
         dom.reloadPage("Adicionando transação", 2000);
       });
