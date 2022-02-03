@@ -34,5 +34,23 @@
     "bandeira": "Master Card",
     "logo_bandeira": "img/icons/master-card.png",
     "cor_cartao": "#FFD900"
+  },
+  {
+    "nome_inst": "PicPay",
+    "bandeira": "Master Card",
+    "logo_bandeira": "img/icons/master-card.png",
+    "cor_cartao": "#11C76F"
+  },
+  {
+    "nome_inst": "Neon",
+    "bandeira": "Visa",
+    "logo_bandeira": "img/icons/visa.png",
+    "cor_cartao": "#039FEA"
+  },
+  {
+    "nome_inst": "Digio",
+    "bandeira": "Master Card",
+    "logo_bandeira": "img/icons/master-card.png",
+    "cor_cartao": "#09255d"
   }
 ]

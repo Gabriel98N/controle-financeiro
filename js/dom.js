@@ -62,6 +62,17 @@ function Dom() {
     return JSON.parse(localStorage.getItem(key));
   }
 
+  function reloadPage(mensagem, tempo) {
+    const loader = document.querySelector('[data-loader="geral"]');
+    const textLoader = loader.querySelector("p");
+    textLoader.innerHTML = mensagem;
+
+    loader.classList.add("active");
+    setTimeout(() => {
+      location.reload();
+    }, tempo);
+  }
+
   return {
     el,
     els,
@@ -76,6 +87,7 @@ function Dom() {
     eventListeners,
     setStorage,
     getStorage,
+    reloadPage,
   };
 }
 

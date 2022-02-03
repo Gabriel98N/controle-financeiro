@@ -17,9 +17,6 @@ export default function Cartao() {
   const arrTransacaoStorage = dom.getStorage("transacao");
   const arrTransacao = arrTransacaoStorage ? arrTransacaoStorage : [];
 
-  const nomeTransacao = dom.el("#nome-transacao");
-  const valorTransacao = dom.el("#valor");
-  const tipoTransacao = dom.el("#tipo-transacao");
   const tabelaTransacao = dom.el(".tabela-transacao");
 
   const arrValores = {
@@ -137,128 +134,140 @@ export default function Cartao() {
     }
   }
 
-  function criarTransacao(nomeTransacao, tipo_transacao, valor, data) {
-    const transacao = dom.create("div");
-    transacao.classList.add("transacao");
+  function abrirFormulario() {
+    if (btnAdicionar) {
+      btnAdicionar.addEventListener("click", (e) => {
+        e.preventDefault();
+        formTransacao.classList.add(active);
+        outsideEvent(
+          formTransacao,
+          () => {
+            formTransacao.classList.remove(active);
+          },
+          ["click"]
+        );
+      });
+    }
+  }
 
+  function criarTransacao(
+    transacao,
+    nomeTransacao,
+    data,
+    sinalTransacao,
+    valor
+  ) {
     if (tabelaTransacao) {
-      valor = valor.replace(",", ".");
-      const moedaBr = dom.conversorMoeda(valor, "PT-BR", "BRL");
+      transacao.classList.add("transacao");
       transacao.innerHTML = `
-        <span data-identificador="${tipo_transacao}"></span>
-        <p class="nome-transacao">${dom.firstLetter(nomeTransacao)}</p>
+        <span data-identificador="${sinalTransacao}"></span>
+        <p class="nome-transacao">${nomeTransacao}</p>
         <p class="data-transacao">${data}</p>
-        <p class="valor-transacao">${tipo_transacao}${moedaBr}</p>
+        <p class="valor-transacao">${sinalTransacao}${valor}</p>
       `;
       tabelaTransacao.appendChild(transacao);
     }
   }
 
-  function somarValores(valor, el, type) {
-    valor = valor.replace(",", ".");
-    type === "despesa"
-      ? arrValores.despesa.push(valor)
-      : arrValores.saldo.push(valor);
+  function limiteCartao(totalDespesa) {
+    const limiteDisponivel = dom.el(".limite-disponivel");
+    const limiteUtilizado = dom.el(".limite-utilizado");
 
-    const element = dom.el(el);
-    const total = arrValores[type].reduce((ac, num) => ac + Number(num), 0);
-    element.innerText = dom.conversorMoeda(total, "PT-BR", "BRL");
-    return total;
+    const somarLimite = (limite) => {
+      return dom.conversorMoeda(limite, "PT-BR", "BRL");
+    };
+
+    if (cartao) {
+      const idCartao = cartao.dataset.id;
+      const { limite } = arrCartao[idCartao];
+      const diminuiLimite = limite - totalDespesa;
+
+      limiteDisponivel.innerText = somarLimite(diminuiLimite);
+      limiteUtilizado.innerText = somarLimite(totalDespesa);
+    }
   }
 
-  function limiteCartao(idCartao, totalDespesa) {
-    const { limite } = arrCartao[idCartao];
-    const subLimite = Number(limite) - totalDespesa;
-    const limiteDisponivel = dom.el(".limite-disponivel");
-    limiteDisponivel.innerText = dom.conversorMoeda(subLimite, "PT-BR", "BRL");
+  function somarValores(valor, tipoTransacao) {
+    valor = Number(valor.replace(",", "."));
+    arrValores[tipoTransacao].push(valor);
+
+    const totalValores = arrValores[tipoTransacao].reduce((ac, num) => {
+      return ac + Number(num);
+    }, 0);
+
+    const elementValor = dom.el(`[data-dados="${tipoTransacao}"] p`);
+    if (elementValor)
+      elementValor.innerText = dom.conversorMoeda(totalValores, "PT-BR", "BRL");
+    return totalValores;
+  }
+
+  function adicionarTransacao() {
+    if (btnTransacao && cartao) {
+      btnTransacao.addEventListener("click", (e) => {
+        e.preventDefault();
+        const idCartao = cartao.dataset.id;
+        const transacao = dom.create("div");
+        const nomeTransacao = dom.el("#nome-transacao").value;
+        const valorTransacao = dom.el("#valor").value;
+        const tipoTransacao = dom.el("#tipo-transacao").value;
+        const sinalTransacao = tipoTransacao === "despesa" ? "-" : "+";
+
+        criarTransacao(
+          transacao,
+          nomeTransacao,
+          Data(),
+          sinalTransacao,
+          valorTransacao
+        );
+
+        arrTransacao.push({
+          nomeTransacao: nomeTransacao,
+          data: Data(),
+          tipoTransacao: sinalTransacao,
+          valor: valorTransacao,
+          id: sinalTransacao === "-" ? idCartao : null,
+        });
+        dom.setStorage("transacao", arrTransacao);
+        dom.reloadPage("Adicionando transação", 2000);
+      });
+    }
   }
 
   function salvarTransacao() {
     arrTransacao.forEach(
-      ({ nomeTransacao, tipo_transacao, valor, data, id }, index) => {
-        criarTransacao(nomeTransacao, tipo_transacao, valor, data);
-
+      ({ nomeTransacao, id, tipoTransacao, data, valor }) => {
+        const transacao = dom.create("div");
+        criarTransacao(transacao, nomeTransacao, data, tipoTransacao, valor);
         if (id && cartao) {
-          const transacao = dom.els(".transacao")[index];
-          transacao.setAttribute("data-transacao", id);
-
-          const idTransacao = transacao.dataset.transacao;
+          transacao.setAttribute("data-id-transacao", id);
           const idCartao = cartao.dataset.id;
-
-          if (idTransacao === idCartao) {
+          if (idCartao === id) {
             transacao.style.display = "flex";
-            const totalDespesa = somarValores(
-              valor,
-              "[data-dados='despesa'] p",
-              "despesa"
-            );
-            limiteCartao(idCartao, totalDespesa);
+            limiteCartao(somarValores(valor, "despesa"));
           } else {
             transacao.style.display = "none";
           }
         } else {
-          somarValores(valor, "[data-dados='saldo'] p", "saldo");
+          somarValores(valor, "saldo");
         }
-
-        selectBanco.addEventListener("change", () => {
-          dom.el("[data-loader]").classList.add(active);
-          setTimeout(() => {
-            location.reload();
-          }, 2000);
-        });
       }
     );
-  }
 
-  function handleClickAbrirForm(e) {
-    e.preventDefault();
-    formTransacao.classList.add(active);
-    outsideEvent(
-      formTransacao,
-      () => {
-        formTransacao.classList.remove(active);
-      },
-      ["click"]
-    );
-  }
-
-  function handleClickTransacao(e) {
-    e.preventDefault();
-    if (cartao) {
-      const verificarTipoTransacao =
-        tipoTransacao.value === "despesa" ? "-" : "+";
-      const data = Data();
-      const idCartao = cartao.dataset.id;
-
-      arrTransacao.push({
-        nomeTransacao: nomeTransacao.value,
-        valor: valorTransacao.value,
-        tipo_transacao: verificarTipoTransacao,
-        data: data,
-        id: verificarTipoTransacao === "-" ? idCartao : null,
-      });
-
-      criarTransacao(
-        nomeTransacao.value,
-        verificarTipoTransacao,
-        valorTransacao.value,
-        data
+    if (selectBanco) {
+      selectBanco.addEventListener("change", () =>
+        dom.reloadPage(
+          `Buscando seus dados do cartão <b>${selectBanco.value}</b>`,
+          2000
+        )
       );
-      nomeTransacao.focus();
-      dom.setStorage("transacao", arrTransacao);
-    }
-  }
-
-  function adicionarTransacao() {
-    if (btnAdicionar) {
-      btnAdicionar.addEventListener("click", handleClickAbrirForm);
-      btnTransacao.addEventListener("click", handleClickTransacao);
     }
   }
 
   function init() {
     selecionarBanco();
     cartaoAtivo();
+    abrirFormulario();
+
     adicionarTransacao();
     salvarTransacao();
   }

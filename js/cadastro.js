@@ -78,6 +78,10 @@ export default function Cadastro() {
               bandeira,
               cor_cartao
             );
+            dom.reloadPage(
+              `Adicionando cartão <b>${nome_inst}</b> na sua lista`,
+              2000
+            );
           }
         });
       });
