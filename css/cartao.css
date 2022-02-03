@@ -117,6 +117,17 @@
   border-radius: inherit;
 }
 
+.aviso-limite {
+  font-size: 0.75rem;
+  line-height: 1.2;
+  color: var(--cor1);
+  margin-top: 0.625rem;
+}
+
+.aviso-limite b {
+  color: var(--cor2);
+}
+
 /*  Area pagamento  */
 .container-pagamento {
   display: grid;

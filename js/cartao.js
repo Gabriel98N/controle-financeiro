@@ -18,6 +18,9 @@ export default function Cartao() {
   const arrTransacao = arrTransacaoStorage ? arrTransacaoStorage : [];
 
   const tabelaTransacao = dom.el(".tabela-transacao");
+  const tipoTransacao = dom.el("#tipo-transacao");
+  const nomeTransacao = dom.el("#nome-transacao");
+  const valorTransacao = dom.el("#valor");
 
   const arrValores = {
     despesa: [],
@@ -172,7 +175,7 @@ export default function Cartao() {
   function limiteCartao(totalDespesa) {
     const limiteDisponivel = dom.el(".limite-disponivel");
     const limiteUtilizado = dom.el(".limite-utilizado");
-    const liquido = dom.el(".liquido");
+    const progresso = dom.el(".liquido");
 
     const somarLimite = (limite) => {
       return dom.conversorMoeda(limite, "PT-BR", "BRL");
@@ -180,8 +183,20 @@ export default function Cartao() {
 
     if (cartao) {
       const idCartao = cartao.dataset.id;
-      const { limite } = arrCartao[idCartao];
+      const { limite, corCartao } = arrCartao[idCartao];
       const diminuiLimite = limite - totalDespesa;
+      const progressoLimite = Math.floor((100 * totalDespesa) / limite);
+      const avisoLimite = dom.el(".aviso-limite b");
+
+      progresso.style.backgroundColor = corCartao;
+      progresso.animate([{ width: 0 }, { width: `${progressoLimite}%` }], {
+        duration: 1000,
+        fill: "forwards",
+      });
+
+      if (avisoLimite) {
+        avisoLimite.innerText = progressoLimite + "%";
+      }
 
       limiteDisponivel.innerText = somarLimite(diminuiLimite);
       limiteUtilizado.innerText = somarLimite(totalDespesa);
@@ -202,53 +217,53 @@ export default function Cartao() {
     return totalValores;
   }
 
+  function fnTransacaoArr(idCartao) {
+    const transacao = dom.create("div");
+    const sinalTransacao = tipoTransacao.value === "despesa" ? "-" : "+";
+
+    arrTransacao.push({
+      nomeTransacao: nomeTransacao.value,
+      data: Data(),
+      tipoTransacao: sinalTransacao,
+      valor: valorTransacao.value,
+      id: sinalTransacao === "-" ? idCartao : null,
+    });
+
+    criarTransacao(
+      transacao,
+      nomeTransacao,
+      Data(),
+      sinalTransacao,
+      valorTransacao
+    );
+
+    dom.setStorage("transacao", arrTransacao);
+    dom.reloadPage("Adicionando transação", 2000);
+  }
+
   function adicionarTransacao() {
     if (btnTransacao && cartao) {
       btnTransacao.addEventListener("click", (e) => {
         e.preventDefault();
         const idCartao = cartao.dataset.id;
-        const transacao = dom.create("div");
-        const nomeTransacao = dom.el("#nome-transacao").value;
-        const valorTransacao = dom.el("#valor").value;
-        const tipoTransacao = dom.el("#tipo-transacao").value;
-        const sinalTransacao = tipoTransacao === "despesa" ? "-" : "+";
-
-        if (tipoTransacao === "despesa") {
-          const valor = Number(valorTransacao.replace(",", "."));
+        if (tipoTransacao.value === "despesa") {
           const { limite } = arrCartao[idCartao];
-          if (valor > limite) {
+          const totalDespesa = somarValores(
+            valorTransacao.value,
+            tipoTransacao.value
+          );
+
+          if (totalDespesa > limite) {
             alert(
               "Não foi possível realizar está operação, você está tentando adicionar uma conta maior que o limite disponível"
             );
+            dom.reloadPage("Cancelando operação", 2000);
           } else {
-            arrTransacao.push({
-              nomeTransacao: nomeTransacao,
-              data: Data(),
-              tipoTransacao: sinalTransacao,
-              valor: valorTransacao,
-              id: sinalTransacao === "-" ? idCartao : null,
-            });
+            fnTransacaoArr(idCartao);
           }
         } else {
-          arrTransacao.push({
-            nomeTransacao: nomeTransacao,
-            data: Data(),
-            tipoTransacao: sinalTransacao,
-            valor: valorTransacao,
-            id: sinalTransacao === "-" ? idCartao : null,
-          });
+          fnTransacaoArr(idCartao);
         }
-
-        criarTransacao(
-          transacao,
-          nomeTransacao,
-          Data(),
-          sinalTransacao,
-          valorTransacao
-        );
-
-        dom.setStorage("transacao", arrTransacao);
-        dom.reloadPage("Adicionando transação", 2000);
       });
     }
   }
