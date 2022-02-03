@@ -202,8 +202,6 @@ export default function Cartao() {
     return totalValores;
   }
 
-  function mostrarTransacao() {}
-
   function adicionarTransacao() {
     if (btnTransacao && cartao) {
       btnTransacao.addEventListener("click", (e) => {
@@ -216,7 +214,29 @@ export default function Cartao() {
         const sinalTransacao = tipoTransacao === "despesa" ? "-" : "+";
 
         if (tipoTransacao === "despesa") {
-          console.log(valorTransacao);
+          const valor = Number(valorTransacao.replace(",", "."));
+          const { limite } = arrCartao[idCartao];
+          if (valor > limite) {
+            alert(
+              "Não foi possível realizar está operação, você está tentando adicionar uma conta maior que o limite disponível"
+            );
+          } else {
+            arrTransacao.push({
+              nomeTransacao: nomeTransacao,
+              data: Data(),
+              tipoTransacao: sinalTransacao,
+              valor: valorTransacao,
+              id: sinalTransacao === "-" ? idCartao : null,
+            });
+          }
+        } else {
+          arrTransacao.push({
+            nomeTransacao: nomeTransacao,
+            data: Data(),
+            tipoTransacao: sinalTransacao,
+            valor: valorTransacao,
+            id: sinalTransacao === "-" ? idCartao : null,
+          });
         }
 
         criarTransacao(
@@ -226,14 +246,6 @@ export default function Cartao() {
           sinalTransacao,
           valorTransacao
         );
-
-        arrTransacao.push({
-          nomeTransacao: nomeTransacao,
-          data: Data(),
-          tipoTransacao: sinalTransacao,
-          valor: valorTransacao,
-          id: sinalTransacao === "-" ? idCartao : null,
-        });
 
         dom.setStorage("transacao", arrTransacao);
         dom.reloadPage("Adicionando transação", 2000);
