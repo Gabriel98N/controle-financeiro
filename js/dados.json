@@ -52,5 +52,17 @@
     "bandeira": "Master Card",
     "logo_bandeira": "img/icons/master-card.png",
     "cor_cartao": "#09255d"
+  },
+  {
+    "nome_inst": "Itaú Click",
+    "bandeira": "Visa",
+    "logo_bandeira": "img/icons/visa.png",
+    "cor_cartao": "#F4945E"
+  },
+  {
+    "nome_inst": "Mercado pago",
+    "bandeira": "Visa",
+    "logo_bandeira": "img/icons/visa.png",
+    "cor_cartao": "#202834"
   }
 ]

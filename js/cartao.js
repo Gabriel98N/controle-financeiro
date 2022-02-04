@@ -163,12 +163,16 @@ export default function Cartao() {
     if (tabelaTransacao) {
       transacao.classList.add("transacao");
       transacao.innerHTML = `
-        <span data-identificador="${sinalTransacao}"></span>
+        <span data-identificador="${sinalTransacao}" style="backgroundColor: };"></span>
         <p class="nome-transacao">${nomeTransacao}</p>
         <p class="data-transacao">${data}</p>
-        <p class="valor-transacao">${sinalTransacao}${valor}</p>
+        <p class="valor-transacao">${sinalTransacao}${dom.conversorMoeda(
+        valor,
+        "PT-BR",
+        "BRL"
+      )}</p>
       `;
-      tabelaTransacao.appendChild(transacao);
+      tabelaTransacao.prepend(transacao);
     }
   }
 

@@ -35,6 +35,7 @@ function Dom() {
   }
 
   function conversorMoeda(numero, lang, type) {
+    numero = typeof numero === "string" ? numero.replace(",", ".") : numero;
     return Number(numero).toLocaleString(lang, {
       style: "currency",
       currency: type,

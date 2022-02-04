@@ -67,7 +67,7 @@
   position: absolute;
   top: 16px;
   left: var(--gap);
-  color: var(--cor2);
+  color: var(--cor3);
   font-size: 0.75rem;
   pointer-events: none;
   transition: 0.2s;
@@ -79,6 +79,7 @@
 .box-input select:valid ~ .label {
   transform: translateY(-10px);
   font-size: 0.5rem;
+  color: var(--cor1);
 }
 
 .btn-confirmar {
@@ -109,7 +110,7 @@
 }
 
 .arrow svg {
-  fill: var(--cor2);
+  fill: var(--cor3);
 }
 
 .cartao-cadastrado h3 {

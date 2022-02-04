@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;900&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <meta name="theme-color" content="#3a454b">
+  <meta name="theme-color" content="#101519">
   <link rel="stylesheet" href="css/style.min.css">
   <title>Controle financeiro</title>
 </head>
@@ -31,6 +31,15 @@
       <div class="container-cartao container">
         <div class="header-cartao">
           <div class="box-cartao">
+            <div class="box-selecionar-banco">
+              <h3>Alterar banco</h3>
+              <div class="select-banco">
+                <select name="banco" id="banco" disabled>
+                  <option value="" disabled selected>Selecione um banco</option>
+                </select>
+                <span class="arrow-personalizada"></span>
+              </div>
+            </div>
             <div class="cartao">
               <p class="nome-impresso">--</p>
               <div class="vencimento">
@@ -73,21 +82,15 @@
               </button>
               <form class="form-transacao" data-card>
                 <h3 class="titulo1">Adicionar conta e dinheiro</h3>
-                <input type="text" name="nome-transacao" id="nome-transacao" placeholder="Nome da Transação" required autocomplete="off">
                 <select name="tipo-transacao" id="tipo-transacao" required>
                   <option value="" selected></option>
                   <option value="saldo">Saldo</option>
                   <option value="despesa">Despesa</option>
                 </select>
+                <input type="text" name="nome-transacao" id="nome-transacao" placeholder="Nome da Transação" required autocomplete="off">
                 <input type="text" name="valor" id="valor" placeholder="Valor" required autocomplete="off">
                 <button class="adicionar-transacao" disabled>Adicionar</button>
               </form>
-            </div>
-            <div class="box-selecionar-banco">
-              <h3>Alterar banco</h3>
-              <select name="banco" id="banco" disabled>
-                <option value="" disabled selected>Selecione um banco</option>
-              </select>
             </div>
           </div>
         </div>

@@ -30,8 +30,9 @@ img {
   --gap: 1.25rem;
 
   --bg: #fff;
-  --bg2: #f5f7fc;
+  --bg2: #f8f9fb;
   --bg3: #ffffff;
+  --bg4: #fafafc;
 
   --cor1: #3a454b;
   --cor2: #404966;
@@ -111,7 +112,7 @@ body {
 
 .content {
   grid-column: 2;
-  padding: 3.75rem var(--gap);
+  padding: 3.75rem var(--gap) var(--gap) var(--gap);
 }
 
 .aside-navegacao {
@@ -193,6 +194,7 @@ body {
 
   .content {
     grid-column: 1;
+    padding: var(--gap);
   }
 
   .aside-navegacao {

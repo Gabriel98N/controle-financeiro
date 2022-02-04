@@ -7,8 +7,8 @@
 
 .header-cartao {
   display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 3.75rem;
+  grid-template-columns: 350px 1fr;
+  gap: 1.25rem;
   position: sticky;
   top: 20px;
   left: 0;
@@ -27,13 +27,15 @@
   display: flex;
   flex-direction: column;
   gap: var(--gap);
+  background-color: var(--bg2);
+  padding: var(--gap);
+  border-radius: 15px;
 }
 
 .cartao {
-  width: 300px;
   height: 180px;
   border-radius: 15px;
-  background-color: var(--bg2);
+  background-color: var(--bg);
   padding: 1.25rem;
   display: flex;
   flex-direction: column;
@@ -131,7 +133,7 @@
 /*  Area pagamento  */
 .container-pagamento {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: var(--gap);
   align-self: flex-start;
 }
@@ -163,29 +165,48 @@
 
 .box-selecionar-banco h3 {
   color: var(--cor3);
+  font-weight: normal;
 }
 
-.box-selecionar-banco select {
+.select-banco {
+  margin-top: 7px;
+  position: relative;
+}
+
+.select-banco select {
   width: 100%;
   padding: 1.25rem;
   border: 0;
-  background: var(--bg2);
+  background: var(--bg);
   border-radius: 5px;
   font-size: 1rem;
   font-family: "Poppins", "Roboto", sans-serif;
-  margin-top: 7px;
   color: var(--cor2);
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
 }
 
-.box-selecionar-banco select:disabled {
+.select-banco select:disabled {
   cursor: not-allowed;
+  color: var(--cor3);
+}
+
+.arrow-personalizada {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: var(--cor-principal);
+  position: absolute;
+  top: 28px;
+  right: 20px;
+}
+
+.select-banco select:focus ~ .arrow-personalizada {
+  background-color: var(--cor2);
 }
 
 @media (max-width: 1200px) {
-  .cartao {
-    width: 100%;
-  }
-
   .box-selecionar-banco {
     grid-column: 1 / -1;
   }
@@ -195,12 +216,6 @@
   }
   .box-pagamento p {
     font-size: 1.125rem;
-  }
-}
-
-@media (max-width: 740px) {
-  .container-pagamento {
-    grid-template-columns: repeat(2, 1fr);
   }
 }
 
@@ -214,6 +229,7 @@
   gap: var(--gap);
   padding: 1.25rem;
   background-color: var(--bg4);
+  box-shadow: var(--box-shadow);
 }
 
 .transacao {
@@ -299,7 +315,7 @@
   position: absolute;
   top: 200px;
   right: 0;
-  width: 400px;
+  width: 100%;
   background-color: var(--bg3);
   z-index: 99;
   padding: var(--gap);
@@ -326,6 +342,9 @@
   color: var(--cor2);
   background-color: var(--bg2);
   padding: 0 1.25rem;
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
 }
 
 .box-input-transacao {
@@ -375,9 +394,5 @@
     position: fixed;
     top: 0;
     left: 0;
-  }
-
-  .fechar {
-    display: block;
   }
 }
