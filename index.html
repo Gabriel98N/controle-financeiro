@@ -10,7 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;900&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <meta name="theme-color" content="#101519">
-  <link rel="stylesheet" href="css/style.min.css">
+  <link rel="stylesheet" href="css/style.css">
   <title>Controle financeiro</title>
 </head>
 
@@ -33,7 +33,7 @@
           <div class="box-cartao">
             <div class="box-selecionar-banco">
               <h3>Alterar banco</h3>
-              <div class="select-banco">
+              <div data-input="select-banco">
                 <select name="banco" id="banco" disabled>
                   <option value="" disabled selected>Selecione um banco</option>
                 </select>
@@ -82,11 +82,15 @@
               </button>
               <form class="form-transacao" data-card>
                 <h3 class="titulo1">Adicionar conta e dinheiro</h3>
-                <select name="tipo-transacao" id="tipo-transacao" required>
-                  <option value="" selected></option>
-                  <option value="saldo">Saldo</option>
-                  <option value="despesa">Despesa</option>
-                </select>
+                <div data-input="transacao">
+                  <select name="tipo-transacao" id="tipo-transacao" required>
+                    <option value="" selected></option>
+                    <option value="" disabled selected>Tipo de Transação</option>
+                    <option value="saldo">Saldo</option>
+                    <option value="despesa">Despesa</option>
+                  </select>
+                  <span class="arrow-personalizada"></span>
+                </div>
                 <input type="text" name="nome-transacao" id="nome-transacao" placeholder="Nome da Transação" required autocomplete="off">
                 <input type="text" name="valor" id="valor" placeholder="Valor" required autocomplete="off">
                 <button class="adicionar-transacao" disabled>Adicionar</button>

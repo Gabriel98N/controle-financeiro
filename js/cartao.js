@@ -106,18 +106,13 @@ export default function Cartao() {
     if (arrCartao) {
       arrCartao.forEach(
         (
-          {
-            instituicao,
-            nomeImp,
-            corCartao,
-            bandeira,
-            diaVenc,
-            logoBandeira,
-            limite,
-          },
+          { instituicao, nomeImp, bandeira, diaVenc, logoBandeira, limite },
           index
         ) => {
           if (idCartao == index) {
+            const { corCartao } = arrCartao[index];
+            const arrowSelectBanco = dom.el("[data-input='select-banco'] span");
+
             mostrarBancoSelecionado(
               nomeImp,
               diaVenc,
@@ -131,6 +126,7 @@ export default function Cartao() {
               if (instituicao === option.value)
                 option.setAttribute("selected", "");
             });
+            cartao ? (arrowSelectBanco.style.backgroundColor = corCartao) : "";
           }
         }
       );
@@ -189,7 +185,8 @@ export default function Cartao() {
       const idCartao = cartao.dataset.id;
       const { limite, corCartao } = arrCartao[idCartao];
       const diminuiLimite = limite - totalDespesa;
-      const progressoLimite = Math.floor((100 * totalDespesa) / limite);
+      const progressoLimite = ((100 * totalDespesa) / limite).toFixed(1);
+
       const avisoLimite = dom.el(".aviso-limite b");
 
       progresso.style.backgroundColor = corCartao;
@@ -224,6 +221,7 @@ export default function Cartao() {
   function fnTransacaoArr(idCartao) {
     const transacao = dom.create("div");
     const sinalTransacao = tipoTransacao.value === "despesa" ? "-" : "+";
+    const { instituicao } = arrCartao[idCartao];
 
     arrTransacao.push({
       nomeTransacao: nomeTransacao.value,
@@ -242,7 +240,10 @@ export default function Cartao() {
     );
 
     dom.setStorage("transacao", arrTransacao);
-    dom.reloadPage("Adicionando transação", 2000);
+    dom.reloadPage(
+      `Adicionando transação para o cartão <b>${instituicao}</b>`,
+      2000
+    );
   }
 
   function adicionarTransacao() {
@@ -295,7 +296,7 @@ export default function Cartao() {
     if (selectBanco) {
       selectBanco.addEventListener("change", () =>
         dom.reloadPage(
-          `Buscando seus dados do cartão <b>${selectBanco.value}</b>`,
+          `Buscando dados do cartão <b>${selectBanco.value}</b>`,
           2000
         )
       );
