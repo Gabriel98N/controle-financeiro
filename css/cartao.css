@@ -9,16 +9,11 @@
   display: grid;
   grid-template-columns: 350px 1fr;
   gap: 1.25rem;
-  position: sticky;
-  top: 20px;
-  left: 0;
-  z-index: 1;
   background-color: var(--bg);
 }
 
 @media (max-width: 1200px) {
   .header-cartao {
-    position: static;
     grid-template-columns: 1fr;
   }
 }
@@ -29,7 +24,7 @@
   gap: var(--gap);
   background-color: var(--bg2);
   padding: var(--gap);
-  border-radius: 15px;
+  border-radius: 5px;
 }
 
 .cartao {
@@ -105,7 +100,7 @@
   height: 7px;
   width: 100%;
   background-color: var(--bg);
-  border-radius: 15px;
+  border-radius: 5px;
   position: relative;
 }
 
@@ -141,7 +136,7 @@
 .box-pagamento {
   background-color: var(--bg2);
   padding: var(--gap);
-  border-radius: 15px;
+  border-radius: 5px;
   height: 150px;
   display: flex;
   align-items: center;
@@ -166,6 +161,8 @@
 .box-selecionar-banco h3 {
   color: var(--cor3);
   font-weight: normal;
+  font-size: 1rem;
+  margin-bottom: 7px;
 }
 
 .select-banco {
@@ -179,8 +176,8 @@
   padding: 0 1.25rem;
   border: 0;
   background: var(--bg);
-  border-radius: 30px;
-  font-size: 1rem;
+  border-radius: 5px;
+  font-size: 0.845rem;
   font-family: "Poppins", "Roboto", sans-serif;
   color: var(--cor2);
   appearance: none;
@@ -222,11 +219,109 @@
   }
 }
 
+/* Faturas */
+.wrapper-slide {
+  overflow: hidden;
+  position: relative;
+}
+
+.nav-faturas {
+  height: 100px;
+
+  background-color: var(--bg2);
+  border-radius: 5px;
+  position: sticky;
+  top: 1.25rem;
+  left: 0;
+  z-index: 99;
+  overflow: hidden;
+  box-shadow: var(--box-shadow);
+  display: flex;
+}
+
+.box-faturas {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  gap: var(--gap);
+  padding: 0 1.25rem;
+  transition: 0.3s;
+}
+
+.box-faturas ::-webkit-scrollbar {
+  background-color: transparent;
+  width: 7px;
+  height: 7px;
+}
+
+.box-faturas a {
+  color: var(--cor1);
+  padding: var(--gap);
+  border-radius: 5px;
+  width: 120px;
+}
+
+.box-faturas a:hover {
+  color: var(--cor-principal);
+  background-color: var(--bg);
+}
+
+.box-faturas a p {
+  font-weight: bold;
+  font-size: 1.125rem;
+  line-height: 18px;
+  text-transform: uppercase;
+}
+
+.box-faturas a span {
+  font-size: 0.75rem;
+}
+
+[data-mes]:nth-child(12) {
+  margin-right: 20px;
+}
+
+[data-mes]:nth-child(1) {
+  margin-left: 20px;
+}
+
+[data-mes].active a {
+  background-color: var(--bg);
+  color: var(--cor-principal);
+}
+
+.btn-slider {
+  position: absolute;
+  top: 0;
+  width: 40px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--cor1);
+  background-color: var(--bg5);
+  z-index: 1000;
+  user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  /* border: 1px solid red; */
+}
+
+.btn-slider i {
+  font-weight: bold;
+}
+
+.proximo {
+  right: 0;
+}
+
 /* Tabela */
+
 .tabela-transacao {
   height: 700px;
   overflow: auto;
-  border-radius: 15px;
+  border-radius: 5px;
   display: flex;
   flex-direction: column;
   gap: var(--gap);
@@ -244,7 +339,7 @@
   padding: 1.25rem;
   position: relative;
   background-color: var(--bg2);
-  border-radius: 0 15px 15px 0;
+  border-radius: 0 5px 5px 0;
 }
 
 .transacao p {
@@ -257,7 +352,7 @@
   left: 0;
   width: 5px;
   height: 100%;
-  border-radius: 15px 0 0 15px;
+  border-radius: 5px 0 0 5px;
 }
 
 [data-identificador="+"] {
@@ -341,7 +436,7 @@
   font-family: "Poppins", "Roboto", sans-serif;
   font-size: 0.845rem;
   outline: none;
-  border-radius: 30px;
+  border-radius: 5px;
   color: var(--cor2);
   background-color: var(--bg2);
   padding: 0 1.25rem;

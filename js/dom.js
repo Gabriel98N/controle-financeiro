@@ -74,6 +74,10 @@ function Dom() {
     }, tempo);
   }
 
+  function removerSelecionado(elements, classe) {
+    elements.forEach((item) => item.classList.remove(classe));
+  }
+
   return {
     el,
     els,
@@ -89,6 +93,7 @@ function Dom() {
     setStorage,
     getStorage,
     reloadPage,
+    removerSelecionado,
   };
 }
 

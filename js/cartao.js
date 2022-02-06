@@ -133,6 +133,55 @@ export default function Cartao() {
     }
   }
 
+  function mostrarFatura(atrMes) {
+    const dataTransacao = dom.els(".data-transacao");
+
+    dataTransacao.forEach((data) => {
+      const mesAtual = data.innerHTML.substring(3, 6).toLowerCase();
+      const transacao = data.parentElement;
+      const idTransacao = transacao.dataset.idTransacao;
+
+      if (cartao) {
+        const idCartao = cartao.dataset.id;
+        if (idTransacao) {
+          if (idTransacao === idCartao) {
+            if (mesAtual === atrMes) {
+              transacao.style.display = "flex";
+            } else {
+              transacao.style.display = "none";
+            }
+          }
+        } else {
+          if (mesAtual === atrMes) {
+            transacao.style.display = "flex";
+          } else {
+            transacao.style.display = "none";
+          }
+        }
+      }
+    });
+  }
+
+  function visualizarFatura() {
+    const meses = dom.els("[data-mes]");
+    const indexMesAtual = new Date().getMonth();
+
+    meses.forEach((mes, index) => {
+      const atrMes = mes.dataset.mes;
+      mes.addEventListener("click", (e) => {
+        e.preventDefault();
+        dom.removerSelecionado(meses, active);
+        mes.classList.add(active);
+        mostrarFatura(atrMes);
+      });
+
+      meses[indexMesAtual].classList.add(active);
+      if (index === indexMesAtual) {
+        mostrarFatura(atrMes);
+      }
+    });
+  }
+
   function abrirFormulario() {
     if (btnAdicionar) {
       btnAdicionar.addEventListener("click", (e) => {
@@ -196,7 +245,7 @@ export default function Cartao() {
       });
 
       if (avisoLimite) {
-        avisoLimite.innerText = progressoLimite + "%";
+        avisoLimite.innerText = `${progressoLimite}%`;
       }
 
       limiteDisponivel.innerText = somarLimite(diminuiLimite);
@@ -310,6 +359,7 @@ export default function Cartao() {
 
     adicionarTransacao();
     salvarTransacao();
+    visualizarFatura();
   }
 
   return { init };
