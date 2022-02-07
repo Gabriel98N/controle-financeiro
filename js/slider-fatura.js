@@ -12,9 +12,6 @@ export default class SliderFatura {
     this.currentSlide = 0;
     this.totalSlides = this.slides.length;
     this.active = "active";
-    this.config = {
-      dist: this.slideWidth.getBoundingClientRect().left,
-    };
   }
 
   handleClickPrev() {
@@ -25,7 +22,8 @@ export default class SliderFatura {
   }
 
   goPrev() {
-    this.btnPrev.addEventListener("click", this.handleClickPrev);
+    if (this.btnPrev)
+      this.btnPrev.addEventListener("click", this.handleClickPrev);
   }
 
   handleClickNext() {
@@ -34,7 +32,8 @@ export default class SliderFatura {
   }
 
   goNext() {
-    this.btnNext.addEventListener("click", this.handleClickNext);
+    if (this.btnNext)
+      this.btnNext.addEventListener("click", this.handleClickNext);
   }
 
   updateScroll() {

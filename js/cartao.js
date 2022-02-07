@@ -21,6 +21,7 @@ export default function Cartao() {
   const tipoTransacao = dom.el("#tipo-transacao");
   const nomeTransacao = dom.el("#nome-transacao");
   const valorTransacao = dom.el("#valor");
+  const indexMesAtual = new Date().getMonth();
 
   const arrValores = {
     despesa: [],
@@ -133,55 +134,6 @@ export default function Cartao() {
     }
   }
 
-  function mostrarFatura(atrMes) {
-    const dataTransacao = dom.els(".data-transacao");
-
-    dataTransacao.forEach((data) => {
-      const mesAtual = data.innerHTML.substring(3, 6).toLowerCase();
-      const transacao = data.parentElement;
-      const idTransacao = transacao.dataset.idTransacao;
-
-      if (cartao) {
-        const idCartao = cartao.dataset.id;
-        if (idTransacao) {
-          if (idTransacao === idCartao) {
-            if (mesAtual === atrMes) {
-              transacao.style.display = "flex";
-            } else {
-              transacao.style.display = "none";
-            }
-          }
-        } else {
-          if (mesAtual === atrMes) {
-            transacao.style.display = "flex";
-          } else {
-            transacao.style.display = "none";
-          }
-        }
-      }
-    });
-  }
-
-  function visualizarFatura() {
-    const meses = dom.els("[data-mes]");
-    const indexMesAtual = new Date().getMonth();
-
-    meses.forEach((mes, index) => {
-      const atrMes = mes.dataset.mes;
-      mes.addEventListener("click", (e) => {
-        e.preventDefault();
-        dom.removerSelecionado(meses, active);
-        mes.classList.add(active);
-        mostrarFatura(atrMes);
-      });
-
-      meses[indexMesAtual].classList.add(active);
-      if (index === indexMesAtual) {
-        mostrarFatura(atrMes);
-      }
-    });
-  }
-
   function abrirFormulario() {
     if (btnAdicionar) {
       btnAdicionar.addEventListener("click", (e) => {
@@ -208,7 +160,7 @@ export default function Cartao() {
     if (tabelaTransacao) {
       transacao.classList.add("transacao");
       transacao.innerHTML = `
-        <span data-identificador="${sinalTransacao}" style="backgroundColor: };"></span>
+        <span data-identificador="${sinalTransacao}"></span>
         <p class="nome-transacao">${nomeTransacao}</p>
         <p class="data-transacao">${data}</p>
         <p class="valor-transacao">${sinalTransacao}${dom.conversorMoeda(
@@ -352,6 +304,96 @@ export default function Cartao() {
     }
   }
 
+  function visualizarFatura() {
+    const mesesFatura = dom.els("[data-mes]");
+    const navFaturas = dom.el(".nav-faturas");
+    const avisoFatura = dom.el(".aviso-fatura");
+
+    if (mesesFatura.length) {
+      const mesAtual = mesesFatura[indexMesAtual];
+      const distMes = mesAtual.getBoundingClientRect().left;
+      navFaturas.scroll({
+        top: 0,
+        left: distMes - 180,
+        behavior: "smooth",
+      });
+
+      mesAtual.classList.add(active);
+      const arrFaturaValor = {
+        jan: [],
+        fev: [],
+        mar: [],
+        abr: [],
+        mai: [],
+        jun: [],
+        jul: [],
+        ago: [],
+        set: [],
+        out: [],
+        nov: [],
+        dez: [],
+      };
+
+      mesesFatura.forEach((item) => {
+        const atr = item.dataset.mes;
+        const valorFatura = item.querySelector("span");
+
+        const idCartao = cartao.dataset.id;
+        arrTransacao.forEach(({ id, valor, data }, index) => {
+          const boxTransacao = dom.els(".transacao")[index];
+          const idTransacao = boxTransacao.dataset.idTransacao;
+
+          const dataTransacao = boxTransacao.querySelector(".data-transacao");
+          const mesTransacao = dataTransacao.innerText
+            .substring(3, 6)
+            .toLowerCase();
+
+          if (id) {
+            avisoFatura.style.display = "none";
+            if (id === idCartao) {
+              const mesTransacao = data.substring(3, 6).toLowerCase();
+              if (mesTransacao === atr) {
+                arrFaturaValor[atr].push(valor);
+                const totalFatura = arrFaturaValor[atr].reduce((ac, n) => {
+                  n = n.replace(",", ".");
+                  return ac + Number(n);
+                }, 0);
+
+                valorFatura.innerText = dom.conversorMoeda(
+                  totalFatura,
+                  "PT-BR",
+                  "BRL"
+                );
+              }
+            }
+          }
+
+          if (idTransacao === idCartao) {
+            if (mesAtual.dataset.mes === mesTransacao) {
+              boxTransacao.style.display = "flex";
+            } else {
+              boxTransacao.style.display = "none";
+            }
+          }
+
+          item.addEventListener("click", (e) => {
+            e.preventDefault();
+            dom.removerSelecionado(mesesFatura, active);
+            item.classList.add(active);
+
+            if (idCartao === idTransacao) {
+              if (atr === mesTransacao) {
+                boxTransacao.style.display = "flex";
+              } else {
+                boxTransacao.style.display = "none";
+              }
+            }
+          });
+        });
+      });
+    }
+  }
+
   function init() {
     selecionarBanco();
     cartaoAtivo();
@@ -359,6 +401,7 @@ export default function Cartao() {
 
     adicionarTransacao();
     salvarTransacao();
+
     visualizarFatura();
   }
 
