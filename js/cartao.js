@@ -337,12 +337,11 @@ export default function Cartao() {
       mesesFatura.forEach((item) => {
         const atr = item.dataset.mes;
         const valorFatura = item.querySelector("span");
-
         const idCartao = cartao.dataset.id;
+
         arrTransacao.forEach(({ id, valor, data }, index) => {
           const boxTransacao = dom.els(".transacao")[index];
           const idTransacao = boxTransacao.dataset.idTransacao;
-
           const dataTransacao = boxTransacao.querySelector(".data-transacao");
           const mesTransacao = dataTransacao.innerText
             .substring(3, 6)
@@ -380,7 +379,6 @@ export default function Cartao() {
             e.preventDefault();
             dom.removerSelecionado(mesesFatura, active);
             item.classList.add(active);
-
             if (idCartao === idTransacao) {
               if (atr === mesTransacao) {
                 boxTransacao.style.display = "flex";

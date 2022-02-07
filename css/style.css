@@ -25,7 +25,7 @@ img {
 }
 
 :root {
-  --cor-principal: #1ed799;
+  --cor-principal: #8257e6;
 
   --gap: 1.25rem;
 
@@ -71,7 +71,7 @@ body.dark {
 }
 
 body {
-  font-family: "Poppins", "Roboto", sans-serif;
+  font-family: "Roboto", "Poppins", sans-serif;
   text-rendering: optimizeLegibility;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
