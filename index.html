@@ -9,8 +9,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;900&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <meta name="theme-color" content="#101519">
-  <link rel="stylesheet" href="css/style.css">
+  <meta name="theme-color" content="#fff">
+  <link rel="stylesheet" href="css/style.min.css">
   <title>Controle financeiro</title>
 </head>
 
@@ -149,23 +149,28 @@
               <div class="barra-progresso">
                 <div class="liquido"></div>
               </div>
-              <span class="aviso-limite">Você já utilizou <b>0%</b> do limite</span>
             </div>
           </div>
           <div class="container-pagamento">
             <div class="box-pagamento" data-dados="despesa">
               <h3>Total à Pagar</h3>
               <p>R$ 0,00</p>
+              <a href="#" class="abrir-modal btn-pagar">Quitar</a>
+              <div data-card="pagamento">
+                <input type="number" name="pagamento" id="pagamento" placeholder="Quanto você quer pagar?" required autocomplete="off">
+                <p class="box-pagamento">R$ <span>0,00</span></p>
+                <button class="confirmar-pagamento" disabled>Realizar pagamento</button>
+              </div>
             </div>
             <div class="box-pagamento" data-dados="saldo">
               <h3>Saldo</h3>
               <p>R$ 0,00</p>
             </div>
-            <div class="box-pagamento box-transacao">
-              <button class="btn-adicionar" disabled>
+            <div class="box-pagamento box-transacao" data-dados="transacao">
+              <button class="abrir-modal btn-adicionar" disabled>
                 <i class="material-icons">add</i>
               </button>
-              <form class="form-transacao" data-card>
+              <form class="form-transacao" data-card="transacao">
                 <h3 class="titulo1">Adicionar conta e dinheiro</h3>
                 <div data-input="transacao">
                   <select name="tipo-transacao" id="tipo-transacao" required>
@@ -180,6 +185,12 @@
                 <input type="text" name="valor" id="valor" placeholder="Valor" required autocomplete="off">
                 <button class="adicionar-transacao" disabled>Adicionar</button>
               </form>
+            </div>
+            <div class="box-pagamento" data-dados="limite">
+              <div class="aviso-limite">
+                <h3>Limite utilizado</h3>
+                <p>0%</p>
+              </div>
             </div>
           </div>
         </div>

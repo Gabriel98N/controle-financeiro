@@ -83,7 +83,7 @@
 
 .label {
   position: absolute;
-  top: 18px;
+  top: 16px;
   left: var(--gap);
   color: var(--cor3);
   font-size: 0.75rem;
@@ -106,7 +106,7 @@
   border-radius: 5px;
   background-color: var(--cor-principal);
   font-size: 1rem;
-  font-family: "Roboto", "Poppins", sans-serif;
+  font-family: "Poppins", "Roboto", sans-serif;
   text-transform: uppercase;
   font-weight: bold;
   border: 0;

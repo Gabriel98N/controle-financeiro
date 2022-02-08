@@ -9,7 +9,6 @@ export default function Cartao() {
   const selectBanco = dom.el("#banco");
   const arrCartao = dom.getStorage("cartao");
 
-  const formTransacao = dom.el(".form-transacao");
   const btnAdicionar = dom.el(".btn-adicionar");
   const btnTransacao = dom.el(".adicionar-transacao");
   const active = "active";
@@ -134,18 +133,24 @@ export default function Cartao() {
     }
   }
 
-  function abrirFormulario() {
-    if (btnAdicionar) {
-      btnAdicionar.addEventListener("click", (e) => {
-        e.preventDefault();
-        formTransacao.classList.add(active);
-        outsideEvent(
-          formTransacao,
-          () => {
-            formTransacao.classList.remove(active);
-          },
-          ["click"]
-        );
+  function abrirModal() {
+    const btns = dom.els(".abrir-modal");
+    const modal = dom.els("[data-card]");
+
+    if (btns.length) {
+      btns.forEach((btn, index) => {
+        const earchModal = modal[index];
+        btn.addEventListener("click", (e) => {
+          e.preventDefault();
+          earchModal.classList.add(active);
+          outsideEvent(
+            earchModal,
+            () => {
+              earchModal.classList.remove(active);
+            },
+            ["click"]
+          );
+        });
       });
     }
   }
@@ -186,19 +191,21 @@ export default function Cartao() {
       const idCartao = cartao.dataset.id;
       const { limite, corCartao } = arrCartao[idCartao];
       const diminuiLimite = limite - totalDespesa;
-      const progressoLimite = ((100 * totalDespesa) / limite).toFixed(1);
+      const progressoLimite = (100 * totalDespesa) / limite;
+      const porcLimite =
+        progressoLimite === 100
+          ? progressoLimite.toFixed(0)
+          : progressoLimite.toFixed(2);
 
-      const avisoLimite = dom.el(".aviso-limite b");
+      const avisoLimite = dom.el(".aviso-limite p");
 
       progresso.style.backgroundColor = corCartao;
-      progresso.animate([{ width: 0 }, { width: `${progressoLimite}%` }], {
+      progresso.animate([{ width: 0 }, { width: `${porcLimite}%` }], {
         duration: 1000,
         fill: "forwards",
       });
 
-      if (avisoLimite) {
-        avisoLimite.innerText = `${progressoLimite}%`;
-      }
+      if (avisoLimite) avisoLimite.innerText = `${porcLimite}%`;
 
       limiteDisponivel.innerText = somarLimite(diminuiLimite);
       limiteUtilizado.innerText = somarLimite(totalDespesa);
@@ -206,7 +213,7 @@ export default function Cartao() {
   }
 
   function somarValores(valor, tipoTransacao) {
-    valor = Number(valor.replace(",", "."));
+    valor = typeof valor === "number" ? valor : valor.replace(",", ".");
     arrValores[tipoTransacao].push(valor);
 
     const totalValores = arrValores[tipoTransacao].reduce((ac, num) => {
@@ -354,7 +361,7 @@ export default function Cartao() {
               if (mesTransacao === atr) {
                 arrFaturaValor[atr].push(valor);
                 const totalFatura = arrFaturaValor[atr].reduce((ac, n) => {
-                  n = n.replace(",", ".");
+                  n = typeof n === "number" ? n : n.replace(",", ".");
                   return ac + Number(n);
                 }, 0);
 
@@ -392,15 +399,39 @@ export default function Cartao() {
     }
   }
 
+  function pagarDespesa() {
+    const btnConfirmar = dom.el(".confirmar-pagamento");
+    const inputPagamento = dom.el("#pagamento");
+
+    btnConfirmar.addEventListener("click", (e) => {
+      e.preventDefault();
+      if (cartao) {
+        const idCartao = cartao.dataset.id;
+
+        arrTransacao
+          .filter(({ id }) => {
+            return id === idCartao;
+          })
+          .forEach((transacao) => {
+            const saldoTotal = transacao.valor - inputPagamento.value;
+            transacao.valor = saldoTotal;
+          });
+        dom.setStorage("transacao", arrTransacao);
+      }
+      dom.reloadPage("Realizando o pagamento", 2000);
+    });
+  }
+
   function init() {
     selecionarBanco();
     cartaoAtivo();
-    abrirFormulario();
+    abrirModal();
 
     adicionarTransacao();
     salvarTransacao();
 
     visualizarFatura();
+    pagarDespesa();
   }
 
   return { init };

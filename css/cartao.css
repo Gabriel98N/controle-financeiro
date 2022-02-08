@@ -115,17 +115,6 @@
   border-radius: inherit;
 }
 
-.aviso-limite {
-  font-size: 0.75rem;
-  line-height: 1.2;
-  color: var(--cor1);
-  margin-top: 0.625rem;
-}
-
-.aviso-limite b {
-  color: var(--cor2);
-}
-
 /*  Area pagamento  */
 .container-pagamento {
   display: grid;
@@ -134,25 +123,50 @@
   align-self: flex-start;
 }
 
-.box-pagamento {
+[data-dados] {
   background-color: var(--bg2);
   padding: var(--gap);
   border-radius: 5px;
-  height: 150px;
+  height: 180px;
   display: flex;
   align-items: center;
   flex-direction: column;
   justify-content: center;
+  position: relative;
 }
 
-.box-pagamento h3 {
+[data-dados] h3 {
   color: var(--cor3);
+  line-height: 14px;
 }
 
-.box-pagamento p {
+[data-dados] p {
   font-size: 1.5rem;
   font-weight: bold;
   color: var(--cor2);
+}
+
+[data-dados="limite"] {
+  text-align: center;
+}
+
+[data-dados="limite"] p {
+  color: var(--cor-principal);
+}
+
+.btn-pagar {
+  color: #fff;
+  background-color: var(--cor-principal);
+  font-size: 0.845rem;
+  margin-top: 1.25rem;
+  width: 100px;
+  padding: 0.625rem;
+  text-align: center;
+  border-radius: 5px;
+}
+
+.box-pagamento p span {
+  display: inline-block;
 }
 
 .box-selecionar-banco {
@@ -179,7 +193,7 @@
   background: var(--bg);
   border-radius: 5px;
   font-size: 0.845rem;
-  font-family: "Roboto", "Poppins", sans-serif;
+  font-family: "Poppins", "Roboto", sans-serif;
   color: var(--cor2);
   appearance: none;
   -moz-appearance: none;
@@ -215,7 +229,7 @@
     grid-column: 1 / -1;
   }
 
-  .box-pagamento h3 {
+  [data-dados] h3 {
     font-size: 1rem;
   }
 }
@@ -234,7 +248,6 @@
   width: calc(100% - 80px);
   height: 100%;
   z-index: 1000;
-  background-color: rgba(15, 21, 22, 0.9);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -242,6 +255,11 @@
   color: var(--cor1);
   font-size: 0.845rem;
   padding: 0 var(--gap);
+  background-color: rgba(212, 218, 219, 0.9);
+}
+
+body.dark .aviso-fatura {
+  background-color: rgba(15, 21, 22, 0.9);
 }
 
 .nav-faturas {
@@ -416,20 +434,15 @@
   cursor: pointer;
 }
 
-.box-transacao button:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
 .box-transacao button i {
   font-weight: bold;
   color: var(--cor-principal);
   font-size: 2rem;
 }
 
-.form-transacao {
+[data-card] {
   position: absolute;
-  top: 170px;
+  top: 200px;
   right: 0;
   width: 100%;
   background-color: var(--bg3);
@@ -440,18 +453,28 @@
   gap: var(--gap);
   border-radius: 5px;
   box-shadow: var(--box-shadow);
+  visibility: hidden;
+  opacity: 0;
+  transform: translate3d(0, -30px, 0);
+  transition: 0.3s;
 }
 
-.form-transacao h3 {
+[data-card].active {
+  visibility: visible;
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+[data-card] h3 {
   color: var(--cor2);
 }
 
-.form-transacao input,
-.form-transacao select,
-.form-transacao button {
+[data-card] input,
+[data-card] select,
+[data-card] button {
   height: 50px;
   border: 0;
-  font-family: "Roboto", "Poppins", sans-serif;
+  font-family: "Poppins", "Roboto", sans-serif;
   font-size: 0.845rem;
   outline: none;
   border-radius: 5px;
@@ -463,6 +486,30 @@
   -webkit-appearance: none;
 }
 
+[data-card] button {
+  background-color: var(--cor-principal);
+  color: #fff;
+  cursor: pointer;
+  font-size: 0.845rem;
+}
+
+[data-card] button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+[data-card] input {
+  width: 100%;
+  background: var(--bg2);
+}
+
+[data-card] input::placeholder {
+  color: var(--cor3);
+}
+
+[data-card] button {
+}
+
 .box-input-transacao {
   width: 100%;
 }
@@ -472,33 +519,4 @@
   font-size: 0.75rem;
   margin-top: 10px;
   text-align: center;
-}
-
-.form-transacao input {
-  width: 100%;
-  background: var(--bg2);
-}
-
-.form-transacao input::placeholder {
-  color: var(--cor3);
-}
-
-.form-transacao button {
-  background-color: var(--cor-principal);
-  color: #fff;
-  cursor: pointer;
-  font-size: 1rem;
-}
-
-[data-card] {
-  visibility: hidden;
-  opacity: 0;
-  transform: translate3d(0, -30px, 0);
-  transition: 0.3s;
-}
-
-[data-card].active {
-  visibility: visible;
-  opacity: 1;
-  transform: translate3d(0, 0, 0);
 }
