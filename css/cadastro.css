@@ -83,7 +83,7 @@
 
 .label {
   position: absolute;
-  top: 16px;
+  top: 18px;
   left: var(--gap);
   color: var(--cor3);
   font-size: 0.75rem;
