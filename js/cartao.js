@@ -402,24 +402,29 @@ export default function Cartao() {
   function pagarDespesa() {
     const btnConfirmar = dom.el(".confirmar-pagamento");
     const inputPagamento = dom.el("#pagamento");
+    const textPagamento = dom.el(".text-pagamento");
 
-    btnConfirmar.addEventListener("click", (e) => {
-      e.preventDefault();
-      if (cartao) {
-        const idCartao = cartao.dataset.id;
+    if (cartao) {
+      const idCartao = cartao.dataset.id;
+      const saldo = dom.el('[data-dados="saldo"] p');
 
-        arrTransacao
-          .filter(({ id }) => {
-            return id === idCartao;
-          })
-          .forEach((transacao) => {
-            const saldoTotal = transacao.valor - inputPagamento.value;
-            transacao.valor = saldoTotal;
-          });
-        dom.setStorage("transacao", arrTransacao);
-      }
-      dom.reloadPage("Realizando o pagamento", 2000);
-    });
+      btnConfirmar.addEventListener("click", (e) => {
+        e.preventDefault();
+
+        arrTransacao.forEach((transacao) => {
+          console.log(transacao);
+        });
+      });
+
+      inputPagamento.addEventListener("keyup", (e) => {
+        const targetPagamento = e.target.value;
+        textPagamento.innerText = dom.conversorMoeda(
+          targetPagamento,
+          "PT-BR",
+          "BRL"
+        );
+      });
+    }
   }
 
   function init() {
